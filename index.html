@@ -513,15 +513,12 @@
         </div>
       </div>
       <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Tell me more about your goals and requirements..."></textarea></div>
-    <a href="https://wa.me/60182057030?text=Hi%20Xaven,%20I%20am%20interested%20in%20your%20property%20services."
+    <a href="#"
+id="submitBtn"
 class="form-submit"
-target="_blank"
 style="text-decoration:none;">
 Send Enquiry
-</a>
-        Send Enquiry
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -589,7 +586,12 @@ document.getElementById('submitBtn').addEventListener('click', function() {
     const interest = document.getElementById('interest').value;
     const message = document.getElementById('message').value;
 
-    const text =
+    if (!name || !phone) {
+        alert('Please enter your Name and Phone Number');
+        return;
+    }
+
+    const whatsappMessage =
 `Hi Xaven,
 
 Name: ${name}
@@ -601,8 +603,8 @@ Message:
 ${message}`;
 
     window.open(
-      `https://wa.me/60182057030?text=${encodeURIComponent(text)}`,
-      '_blank'
+        `https://wa.me/60182057030?text=${encodeURIComponent(whatsappMessage)}`,
+        '_blank'
     );
 });
 </script>
