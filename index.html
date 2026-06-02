@@ -265,9 +265,63 @@
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
   }
+  .gold-particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+}
+
+.gold-particles::before,
+.gold-particles::after{
+    content:'';
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        rgba(201,168,76,0.18) 0%,
+        rgba(201,168,76,0) 70%
+    );
+    animation:floatParticle 12s ease-in-out infinite alternate;
+}
+
+.gold-particles::before{
+    top:20%;
+    left:10%;
+}
+
+.gold-particles::after{
+    bottom:10%;
+    right:10%;
+    animation-delay:6s;
+}
+
+@keyframes floatParticle{
+    from{
+        transform:translateY(0px) translateX(0px);
+    }
+    to{
+        transform:translateY(-50px) translateX(30px);
+    }
+}
+
+section,
+header,
+nav,
+footer{
+    position:relative;
+    z-index:2;
+}
 </style>
 </head>
 <body>
+<div class="gold-particles"></div>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
