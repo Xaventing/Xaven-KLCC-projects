@@ -480,7 +480,7 @@
       <a href="tel:+60182057030" class="contact-method">
         <div class="contact-method-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M6.5 2C6.5 2 5 5 5 7.5C5 13.5 9.5 18 15.5 18C18 18 21 16.5 21 16.5L18.5 14L16 16.5C16 16.5 12.5 15 10 12.5C7.5 10 6 6.5 6 6.5L8.5 4L6.5 2Z" stroke="#C9A84C" stroke-width="1" stroke-linejoin="round"/></svg></div>
         <span class="contact-method-label">Call</span>
-        <span class="contact-method-value">+60 12-345 6789</span>
+        <span class="contact-method-value">+60 18-205 7030</span>
       </a>
       <a href="mailto:xaventing77@gmail.com" class="contact-method">
         <div class="contact-method-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="13" rx="1" stroke="#C9A84C" stroke-width="1"/><path d="M2 7l9 6 9-6" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/></svg></div>
@@ -513,7 +513,12 @@
         </div>
       </div>
       <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Tell me more about your goals and requirements..."></textarea></div>
-      <button class="form-submit" id="submitBtn">
+    <a href="https://wa.me/60182057030?text=Hi%20Xaven,%20I%20am%20interested%20in%20your%20property%20services."
+class="form-submit"
+target="_blank"
+style="text-decoration:none;">
+Send Enquiry
+</a>
         Send Enquiry
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -576,17 +581,30 @@
   document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
 
   // Form submit
-  document.getElementById('submitBtn').addEventListener('click',function(){
-    const name=document.getElementById('name').value.trim();
-    const email=document.getElementById('email').value.trim();
-    if(!name||!email){alert('Please fill in your name and email.');return;}
-    this.innerHTML='&#10003;&nbsp; Enquiry Sent';
-    this.style.background='#2d5a27';this.style.color='#fff';this.disabled=true;
-    setTimeout(()=>{
-      this.innerHTML='https://wa.me/60182057030?text=Hi%20Xaven <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      this.style.background='';this.style.color='';this.disabled=false;
-    },3000);
-  });
+document.getElementById('submitBtn').addEventListener('click', function() {
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const interest = document.getElementById('interest').value;
+    const message = document.getElementById('message').value;
+
+    const text =
+`Hi Xaven,
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Interest: ${interest}
+
+Message:
+${message}`;
+
+    window.open(
+      `https://wa.me/60182057030?text=${encodeURIComponent(text)}`,
+      '_blank'
+    );
+});
 </script>
 </body>
 </html>
