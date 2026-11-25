@@ -130,9 +130,27 @@ input,select{border-radius:8px;background:#11110f}
  .nav{gap:10px}.brand{font-size:17px}header .gold{font-size:10px;letter-spacing:1px}
 }
 
+
+/* Hero layout refinement — landscape split with clear name hierarchy */
+.heroGrid{grid-template-columns:.92fr 1.08fr;gap:clamp(28px,5vw,68px);align-items:center}
+.heroGrid .portrait{grid-column:1;grid-row:1;width:100%;max-width:none;aspect-ratio:5/4;justify-self:stretch;box-shadow:10px 10px 0 -4px #171717,10px 10px 0 -3px #8c7047}
+.heroIntro{grid-column:2;grid-row:1;max-width:620px}
+.heroGreeting{font-size:clamp(17px,2vw,23px);font-weight:400;letter-spacing:.02em;color:#c9c1b5;margin-top:18px}
+.heroIntro h1{font-size:clamp(48px,6vw,76px);line-height:1.02;margin:2px 0 13px;font-weight:500;letter-spacing:-.045em}
+.heroLead{font-size:17px!important;line-height:1.5!important;color:#e1d5c2!important;margin:0 0 12px!important;max-width:540px!important}
+.heroDescription{font-size:13px!important;line-height:1.85!important;color:#aaa49a!important;max-width:530px!important;margin:0 0 13px!important}
+@media(max-width:720px){
+ .heroGrid{grid-template-columns:1fr;gap:25px}
+ .heroGrid .portrait{grid-column:1;grid-row:1;width:100%;max-width:460px;aspect-ratio:16/10;justify-self:center}
+ .heroIntro{grid-column:1;grid-row:2}
+ .heroGreeting{font-size:17px;margin-top:0}
+ .heroIntro h1{font-size:clamp(43px,11vw,58px)}
+ .heroLead{font-size:15px!important}
+ .heroDescription{font-size:12px!important}
+}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
-<section class="hero"><div class="wrap heroGrid"><div><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><h1>Hi, I'm <span class="gold">Xaven Ting.</span><br>Find a property that fits your next move.</h1><p>Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div></div></section>
+<section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
 <section id="categories"><div class="wrap"><div class="head"><div class="eyebrow">DISCOVER BY PURPOSE</div><h2>What are you looking for?</h2><p>Select a category to explore matching projects.</p></div><div class="cats">
 <div class="cat active" data-tag="Foreigner Friendly"><small>01 / PRIORITY</small><h3>Foreigner Friendly</h3><p>Explore projects for eligible foreign buyers.</p></div><div class="cat" data-tag="First Home Buyer"><small>02</small><h3>First Home Buyer</h3><p>Options for your first property purchase.</p></div><div class="cat" data-tag="Investment Friendly"><small>03</small><h3>Investment Friendly</h3><p>Explore property investment opportunities.</p></div><div class="cat" data-tag="Renter Friendly"><small>04</small><h3>Renter Friendly</h3><p>Consider rental demand and connectivity.</p></div></div>
 <div class="head" style="margin-top:40px"><div class="eyebrow">PROJECT DIRECTORY</div><h2 id="projects">Explore Projects</h2><p id="count">Sample project listings</p></div>
