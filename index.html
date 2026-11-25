@@ -39,7 +39,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 let data = [];
-let chosen = new Set(["Foreigner Friendly"]);
+let chosen = new Set();
 const $ = id => document.getElementById(id);
 
 function esc(value) {
@@ -138,7 +138,7 @@ async function loadPublishedProjects() {
       };
     }).sort((a,b)=>(a.order-b.order)||a.n.localeCompare(b.n));
     render();
-    const detailMatch=location.hash.match(/^#project\\/(.+)$/);if(detailMatch)openProjectDetail(decodeURIComponent(detailMatch[1]),false);
+    const detailMatch=location.hash.match(/^#project\/(.+)$/);if(detailMatch)openProjectDetail(decodeURIComponent(detailMatch[1]),false);
   } catch (error) {
     console.error("Could not load published projects:",error);
     $("count").textContent = "Project listings are temporarily unavailable.";
