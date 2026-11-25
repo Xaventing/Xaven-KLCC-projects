@@ -536,36 +536,36 @@ input,select{border-radius:8px;background:#11110f}
 
 
 
-/* Soft blurred edge treatment for the banner artwork */
+/* Vertical fade blend: soften only the top and bottom edges into the page */
 .hero.heroBanner:before{
   content:"";
   position:absolute;
-  inset:-22px;
+  inset:-20px 0;
   z-index:0;
   pointer-events:none;
   background-image:url("xaven-hero-banner.png");
   background-size:cover;
   background-position:center;
-  filter:blur(22px);
-  opacity:.58;
-  transform:scale(1.035);
+  filter:blur(24px);
+  opacity:.48;
+  transform:scale(1.025);
 }
 .heroBannerImage{
   position:relative;
   z-index:1;
-  -webkit-mask-image:radial-gradient(ellipse 88% 88% at 50% 48%,#000 68%,rgba(0,0,0,.82) 82%,transparent 100%);
-  mask-image:radial-gradient(ellipse 88% 88% at 50% 48%,#000 68%,rgba(0,0,0,.82) 82%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 87%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 87%,transparent 100%);
 }
 .heroBannerActions{z-index:2}
 @media(max-width:720px){
   .hero.heroBanner:before{
-    inset:-14px;
-    filter:blur(17px);
-    opacity:.65;
+    inset:-12px 0;
+    filter:blur(18px);
+    opacity:.52;
   }
   .heroBannerImage{
-    -webkit-mask-image:radial-gradient(ellipse 96% 92% at 50% 48%,#000 73%,rgba(0,0,0,.8) 88%,transparent 100%);
-    mask-image:radial-gradient(ellipse 96% 92% at 50% 48%,#000 73%,rgba(0,0,0,.8) 88%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 16%,#000 84%,transparent 100%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 16%,#000 84%,transparent 100%);
   }
 }
 
