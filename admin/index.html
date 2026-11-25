@@ -45,6 +45,27 @@
     <section class="panel" id="settings"><h2>Settings</h2><p class="muted">Signed in as <span id="signedEmail">—</span></p></section>
   </main>
 </div>
+<script>
+(function(){
+  var preview = new URLSearchParams(window.location.search).get("preview") === "1";
+  if (!preview) return;
+  document.getElementById("loginView").classList.add("hidden");
+  document.getElementById("appView").classList.remove("hidden");
+  document.getElementById("previewBar").style.display = "block";
+  document.getElementById("logoutBtn").classList.add("hidden");
+  document.getElementById("setupNotice").classList.add("hidden");
+  document.getElementById("projectCount").textContent = "5";
+  document.getElementById("publishedCount").textContent = "3";
+  document.getElementById("draftCount").textContent = "2";
+  document.getElementById("totalHint").textContent = "Demo projects";
+  document.getElementById("publishedHint").textContent = "Sample listing status";
+  document.getElementById("draftHint").textContent = "Sample drafts";
+  document.getElementById("projectIntro").textContent = "Example project records shown for layout preview. This is not connected to your live listings.";
+  document.getElementById("projectTable").style.display = "block";
+  document.getElementById("sampleLabel").style.display = "inline-block";
+  document.getElementById("signedEmail").textContent = "Preview session (not signed in)";
+})();
+</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
