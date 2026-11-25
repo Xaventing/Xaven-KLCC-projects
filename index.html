@@ -411,6 +411,129 @@ input,select{border-radius:8px;background:#11110f}
   .filters .locationSelect select{min-height:44px;font-size:13px}
 }
 
+
+/* FINAL HERO — live website composition, not a flattened banner image */
+.hero{
+  position:relative;
+  isolation:isolate;
+  min-height:clamp(560px,56.25vw,820px);
+  display:flex;
+  align-items:center;
+  padding:clamp(38px,5vw,76px) 0;
+  overflow:hidden;
+  border:0;
+  background:
+    radial-gradient(ellipse at 17% 48%,rgba(128,91,43,.22),transparent 38%),
+    radial-gradient(ellipse at 78% 8%,rgba(173,128,68,.12),transparent 35%),
+    linear-gradient(110deg,#17130f 0%,#100f0d 52%,#090909 100%);
+}
+.hero:before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(8,8,8,.12) 40%,#090909 75%),
+    repeating-linear-gradient(115deg,transparent 0 170px,rgba(205,165,103,.035) 171px,transparent 173px);
+}
+.hero:after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  width:620px;height:620px;right:-280px;top:-330px;border-radius:50%;
+  border:1px solid rgba(211,174,112,.22);
+  box-shadow:0 0 0 42px rgba(211,174,112,.035),0 0 0 90px rgba(211,174,112,.025);
+}
+.heroGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);
+  gap:clamp(22px,3.4vw,54px);
+  align-items:center;
+  width:100%;
+}
+.heroGrid .portrait{
+  grid-column:1;grid-row:1;
+  width:100%;max-width:none;
+  height:clamp(390px,43vw,620px);
+  aspect-ratio:auto;
+  justify-self:stretch;
+  position:relative;isolation:isolate;overflow:hidden;
+  border:0;box-shadow:none;background:transparent;
+}
+.heroGrid .portrait img{
+  display:block;width:100%;height:100%;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:scale(1.04);
+  filter:drop-shadow(0 24px 35px rgba(0,0,0,.42));
+}
+.heroGrid .portrait:after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 48%,#100f0d 100%),
+    linear-gradient(180deg,#100f0d12 0%,transparent 20%,transparent 78%,#0b0b0a 100%),
+    radial-gradient(ellipse at 46% 43%,transparent 52%,rgba(8,8,8,.18) 78%,#0b0b0a 100%);
+}
+.heroIntro{
+  grid-column:2;grid-row:1;
+  max-width:650px;position:relative;z-index:2;
+  padding:clamp(12px,2vw,30px) 0;
+}
+.heroIntro .eyebrow{font-size:10px;letter-spacing:3.5px;line-height:1.8;color:#d9b77c}
+.heroGreeting{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(25px,3vw,40px);font-style:italic;
+  color:#eee5d7;line-height:1.05;margin:22px 0 0;
+}
+.heroIntro h1{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(62px,7vw,104px);font-weight:500;
+  letter-spacing:-.055em;line-height:.92;margin:0 0 20px;
+}
+.heroLead{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(23px,2.5vw,35px)!important;
+  line-height:1.2!important;color:#eee3d1!important;
+  max-width:570px!important;margin:0 0 20px!important;
+}
+.heroDescription{
+  font-size:clamp(13px,1.1vw,15px)!important;
+  line-height:1.85!important;color:#bdb5a8!important;
+  max-width:540px!important;margin:0 0 22px!important;
+  padding-left:18px;border-left:1px solid #c6a16b;
+}
+.heroIntro .btn{margin:7px 9px 0 0;padding:15px 20px;font-size:11px;letter-spacing:1.1px}
+@media(max-width:720px){
+  .hero{min-height:0;padding:30px 0 38px}
+  .heroGrid{
+    grid-template-columns:minmax(0,46%) minmax(0,54%);
+    gap:8px;align-items:center;
+  }
+  .heroGrid .portrait{
+    grid-column:1;grid-row:1;
+    width:100%;height:auto;aspect-ratio:3/5;
+    max-width:none;align-self:center;
+  }
+  .heroGrid .portrait img{
+    width:100%;height:100%;object-fit:contain!important;
+    object-position:center bottom!important;transform:scale(1.03);
+  }
+  .heroGrid .portrait:after{
+    background:
+      linear-gradient(90deg,transparent 46%,#100f0d 100%),
+      linear-gradient(180deg,transparent 82%,#0b0b0a 100%);
+  }
+  .heroIntro{grid-column:2;grid-row:1;padding:0;min-width:0}
+  .heroIntro .eyebrow{font-size:7px;letter-spacing:1.15px;line-height:1.6}
+  .heroGreeting{font-size:clamp(15px,4vw,21px);margin:9px 0 2px}
+  .heroIntro h1{font-size:clamp(25px,7.2vw,42px);line-height:.98;letter-spacing:-.05em;margin:0 0 10px}
+  .heroLead{font-size:clamp(13px,3.4vw,18px)!important;line-height:1.25!important;margin:0 0 10px!important}
+  .heroDescription{font-size:clamp(9px,2.45vw,12px)!important;line-height:1.55!important;padding-left:8px;margin:0 0 9px!important}
+  .heroIntro .btn{display:block;width:100%;margin:7px 0 0;padding:9px 4px;text-align:center;font-size:7px;letter-spacing:.35px;white-space:nowrap}
+}
+@media(max-width:380px){
+  .heroGrid{grid-template-columns:minmax(0,44%) minmax(0,56%);gap:6px}
+  .heroIntro h1{font-size:clamp(23px,6.8vw,30px)}
+  .heroIntro .eyebrow{font-size:6.5px}
+  .heroDescription{font-size:9px!important}
+}
+
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
