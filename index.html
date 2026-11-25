@@ -557,48 +557,24 @@ input,select{border-radius:8px;background:#11110f}
   object-position:center center;
 }
 .heroBannerActions{
-  position:absolute;
-  right:6%;
-  bottom:10%;
-  width:min(43%,560px);
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  z-index:2;
+  position:absolute;right:6%;bottom:8%;width:min(35%,420px);
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;z-index:2;
 }
 .heroBannerActions .btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  margin:0;
-  padding:12px 10px;
-  text-align:center;
-  white-space:nowrap;
-  font-size:clamp(9px,.9vw,12px);
-  letter-spacing:1px;
+  display:flex;align-items:center;justify-content:center;
+  min-height:38px;margin:0;padding:9px 8px;text-align:center;
+  white-space:nowrap;font-size:clamp(8px,.72vw,10px);
+  letter-spacing:.65px;border-radius:5px;
 }
 @media(max-width:720px){
   .hero.heroBanner{aspect-ratio:16/9}
   .heroBannerImage{object-fit:contain}
-  .heroBannerActions{
-    right:4%;
-    bottom:7%;
-    width:48%;
-    gap:5px;
-  }
-  .heroBannerActions .btn{
-    min-height:27px;
-    padding:6px 3px;
-    border-radius:4px;
-    font-size:clamp(6px,1.65vw,9px);
-    letter-spacing:.2px;
-    line-height:1.1;
-  }
+  .heroBannerActions{right:4%;bottom:7%;width:39%;gap:5px}
+  .heroBannerActions .btn{min-height:23px;padding:5px 3px;border-radius:4px;font-size:clamp(5.5px,1.35vw,7.5px);letter-spacing:0;line-height:1.1}
 }
 @media(max-width:380px){
-  .heroBannerActions{width:51%;right:3%;bottom:6%;gap:4px}
-  .heroBannerActions .btn{font-size:6px;min-height:24px}
+  .heroBannerActions{width:41%;right:3%;bottom:6%;gap:4px}
+  .heroBannerActions .btn{font-size:5.5px;min-height:21px}
 }
 
 </style></head><body>
