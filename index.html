@@ -382,6 +382,35 @@ input,select{border-radius:8px;background:#11110f}
  #categories .cat h3{font-size:11px;white-space:nowrap}
 }
 
+
+/* Simplified project directory filters: one compact location dropdown */
+.filters{
+  display:block;
+  width:min(100%,280px);
+  padding:0;
+  margin:22px 0 18px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.filters .locationSelect{width:100%}
+.filters .locationSelect select{
+  width:100%;
+  min-height:48px;
+  padding:11px 42px 11px 15px;
+  border:1px solid #514936;
+  border-radius:7px;
+  background-color:#151411;
+  color:#e9dfcf;
+  font-size:14px;
+  cursor:pointer;
+}
+@media(max-width:720px){
+  .filters{width:min(100%,245px);margin:18px 0 14px}
+  .filters .locationSelect select{min-height:44px;font-size:13px}
+}
+
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
@@ -392,7 +421,7 @@ input,select{border-radius:8px;background:#11110f}
 <div class="cat" data-tag="Renter Friendly"><h3>Renter Friendly</h3></div>
 </div>
 <div class="head" style="margin-top:40px"><div class="eyebrow">PROJECT DIRECTORY</div><h2 id="projects">Explore Projects</h2><p id="count">Sample project listings</p></div>
-<div class="filters"><div><label>SEARCH PROJECT</label><input id="q" placeholder="Search project or developer"></div><div><label>LOCATION</label><select id="area"><option value="">All locations</option><option>KLCC</option><option>Old Klang Road</option><option>Setapak</option><option>Sentul</option><option>Kepong</option></select></div><div><label>PROPERTY TYPE</label><select id="type"><option value="">All types</option><option>Condominium</option><option>Serviced Residence</option><option>Luxury Residence</option></select></div></div>
+<div class="filters"><div class="locationSelect"><select id="area" aria-label="Choose location"><option value="">All locations</option><option>KLCC</option><option>Old Klang Road</option><option>Setapak</option><option>Sentul</option><option>Kepong</option></select></div></div>
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Greater Klang Valley</span></div></div></section>
@@ -433,11 +462,9 @@ function priceLabel(value) {
   return Number.isFinite(n) && n > 0 ? "From RM " + n.toLocaleString("en-MY") : esc(value);
 }
 function render() {
-  const q = $("q").value.toLowerCase().trim(), area = $("area").value, type = $("type").value;
+  const area = $("area").value;
   const rows = data.filter(x =>
-    (!q || (x.n+" "+x.d+" "+x.desc).toLowerCase().includes(q)) &&
     (!area || x.a === area) &&
-    (!type || x.t === type) &&
     (!chosen.size || x.tags.some(v => chosen.has(v)))
   );
   $("count").textContent = rows.length + " published projects";
@@ -494,7 +521,7 @@ document.querySelectorAll("[data-tag]").forEach(e => e.addEventListener("click",
   else chosen.has(v)?chosen.delete(v):chosen.add(v);
   syncTags(); render();
 }));
-["q","area","type"].forEach(id => $(id).addEventListener(id==="q"?"input":"change",render));
+$("area").addEventListener("change",render);
 
 async function loadPublishedProjects() {
   $("count").textContent = "Loading published projects…";
