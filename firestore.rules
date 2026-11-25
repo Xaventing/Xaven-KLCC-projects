@@ -6,6 +6,11 @@ service cloud.firestore {
         && request.auth.uid == "3LRiPf2z3iZtcTgIQPZeZtgrOVi2";
     }
 
+    match /clientMoments/{momentId} {
+      allow get, list: if isAdmin() || resource.data.status == "Published";
+      allow create, update, delete: if isAdmin();
+    }
+
     match /projects/{projectId} {
       // Public visitors can read published projects; the admin can read all projects.
       allow get, list: if isAdmin() || resource.data.status == "Published";
