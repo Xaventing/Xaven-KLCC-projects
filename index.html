@@ -54,6 +54,45 @@ footer{padding:35px 0;color:#817b71}
 .detailTitle{font-weight:500;letter-spacing:-.035em}
 .detailMainImage{background:#161613}
 .detailActions a{letter-spacing:1px}
+
+/* Refined controls and compact editorial project cards */
+.btn,.detailBack,.galleryBtn,.detailActions a,.tag{
+ border-radius:7px;
+ transition:all .24s ease;
+}
+.btn{
+ background:linear-gradient(135deg,#e0c18e,#b58b50);
+ box-shadow:0 7px 22px #c7a36a20,inset 0 1px #fff5;
+ border:1px solid #e0c18e;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px #c7a36a35;background:linear-gradient(135deg,#ecd2a5,#c49a5d)}
+.btn.alt{background:linear-gradient(135deg,#1b1a17,#11110f);border:1px solid #806a49;color:#e8ddca;box-shadow:inset 0 1px #ffffff0a}
+.btn.alt:hover{border-color:#d0ad72;background:#272116;color:#fff}
+.tag{border-radius:999px;padding:8px 14px;border-color:#514633;background:#171613}
+.tag:hover{border-color:var(--gold);color:#f5e4c6;background:#282116}
+.tag.active{background:linear-gradient(135deg,#e0c18e,#b58b50);border-color:#d7b77f;color:#17130d;box-shadow:0 4px 14px #c7a36a22}
+.filters{border-radius:12px;box-shadow:0 12px 34px #0003}
+input,select{border-radius:8px;background:#11110f}
+.card{border-radius:13px;overflow:hidden;background:#141411;border:1px solid #393329;box-shadow:0 14px 38px #0005}
+.card:hover{transform:translateY(-4px);border-color:#9d7d4e;box-shadow:0 20px 48px #0008}
+.photo{height:220px;border-radius:0;background:#181714}
+.body{padding:20px 21px 21px}
+.body h3{font-size:20px}
+.projectMeta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}
+.projectPrice{font-size:18px;color:#e4c38f;font-weight:600;letter-spacing:.01em}
+.projectLocation{font-size:11px;color:#b8ad9b;display:flex;align-items:center;gap:6px}
+.projectExpand{display:none;margin-top:15px;padding-top:14px;border-top:1px solid #373126;color:#bdb5a8;font-size:13px;line-height:1.8}
+.card.expanded .projectExpand{display:block}
+.projectCardActions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:17px}
+.learnBtn,.viewBtn{border-radius:7px;padding:10px 13px;font-size:10px;letter-spacing:1.1px;font-weight:700;cursor:pointer}
+.learnBtn{background:transparent;border:1px solid #766344;color:#d9c39f}
+.learnBtn:hover{background:#c7a36a16;border-color:#d0ad72}
+.viewBtn{background:linear-gradient(135deg,#dfbf8c,#b68c51);border:1px solid #dfbf8c;color:#17130d;box-shadow:0 5px 16px #c7a36a20}
+.viewBtn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.detailBack{border-radius:8px;background:#191814;border:1px solid #786343;color:#e7d8c0;padding:11px 16px}
+.detailBack:hover,.galleryBtn:hover{border-color:var(--gold);background:#2a2419}
+.detailActions a{border-radius:8px;box-shadow:0 6px 18px #c7a36a18}
+.detailActions a.secondary{box-shadow:none}
 @media(max-width:720px){
  .hero{padding:48px 0 58px}.heroGrid{gap:32px}.hero h1{font-size:clamp(39px,11vw,55px)}.hero p{font-size:14px}
  section{padding:55px 0}.photo{height:220px}.cat{min-height:135px;padding:17px}
@@ -115,11 +154,9 @@ function render() {
   );
   $("count").textContent = rows.length + " published projects";
   $("cards").innerHTML = rows.length ? rows.map(x =>
-    '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':'')+'<span style="position:relative;z-index:1;text-shadow:0 1px 4px #000">'+esc(x.a.toUpperCase())+' · '+esc(x.t.toUpperCase())+'</span></div><div class="body"><h3>'+esc(x.n)+'</h3><div class="loc">'+esc(x.a.toUpperCase())+' · KUALA LUMPUR</div><div class="price">'+priceLabel(x.p)+'</div>'+
-    x.tags.map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+
-    '<p style="font-size:11px;color:#aaa49a">'+esc(x.d)+'</p>'+
-    (x.desc?'<p>'+esc(x.desc)+'</p>':'')+
-    '<span class="cardMore">VIEW PROJECT DETAILS ↗</span>'+
+    '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':'<span style="position:relative;z-index:1">PROJECT IMAGE</span>')+'<span style="position:absolute;z-index:1;left:14px;bottom:13px;text-shadow:0 1px 5px #000;background:#090908a8;padding:5px 9px;border-radius:4px">'+esc((x.a||"").toUpperCase())+'</span></div><div class="body"><h3>'+esc(x.n)+'</h3><div class="projectMeta"><div class="projectPrice">'+priceLabel(x.p)+'</div><div class="projectLocation"><span>⌖</span>'+esc(x.a||"Kuala Lumpur")+'</div></div>'+
+    '<div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
+    '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div>'+
     '</div></article>'
   ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
 }
@@ -148,7 +185,11 @@ function closeProjectDetail(clearHash=true){
  $("projectDetail").classList.remove("open");$("projectDetail").setAttribute("aria-hidden","true");document.body.style.overflow="";
  if(clearHash&&location.hash.startsWith("#project/"))history.replaceState({},"",location.pathname+location.search);
 }
-$("cards").addEventListener("click",e=>{const card=e.target.closest("[data-project-id]");if(card)openProjectDetail(card.dataset.projectId);});
+$("cards").addEventListener("click",e=>{
+ const action=e.target.closest("[data-action]");const card=e.target.closest("[data-project-id]");if(!card)return;
+ if(action?.dataset.action==="expand"){const expanded=card.classList.toggle("expanded");action.textContent=expanded?"SHOW LESS −":"LEARN MORE +";return;}
+ if(action?.dataset.action==="view")openProjectDetail(card.dataset.projectId);
+});
 $("detailBack").addEventListener("click",()=>closeProjectDetail());
 $("projectDetail").addEventListener("click",e=>{if(e.target.id==="projectDetail")closeProjectDetail();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
