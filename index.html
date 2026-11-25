@@ -255,6 +255,80 @@ input,select{border-radius:8px;background:#11110f}
   .heroLead{font-size:25px!important}
   .heroDescription{font-size:13px!important}
 }
+
+/* Mobile hero: keep the landscape two-column composition */
+@media(max-width:720px){
+  .hero{min-height:0;display:flex;align-items:center;padding:34px 0 40px}
+  .heroGrid{
+    display:grid;
+    grid-template-columns:minmax(0,42%) minmax(0,58%);
+    gap:10px;
+    align-items:center;
+  }
+  .heroGrid .portrait{
+    grid-column:1;grid-row:1;
+    width:100%;max-width:none;
+    aspect-ratio:3/5;
+    justify-self:stretch;
+    overflow:hidden;
+  }
+  .heroGrid .portrait img{
+    width:100%;height:100%;
+    object-fit:contain!important;
+    object-position:center center!important;
+  }
+  .heroGrid .portrait:after{
+    background:
+      linear-gradient(90deg,transparent 48%,#0b0b0a 100%),
+      linear-gradient(180deg,transparent 72%,#0b0b0a55 100%);
+  }
+  .heroIntro{
+    grid-column:2;grid-row:1;
+    min-width:0;max-width:none;
+    padding:0;
+  }
+  .hero .eyebrow{
+    font-size:7px;
+    line-height:1.6;
+    letter-spacing:1.2px;
+  }
+  .heroGreeting{font-size:clamp(13px,3.7vw,18px);margin:5px 0 2px}
+  .heroIntro h1{
+    font-size:clamp(23px,6.3vw,34px);
+    line-height:1;
+    letter-spacing:-.045em;
+    margin:0 0 9px;
+    overflow-wrap:normal;
+  }
+  .heroLead{
+    font-size:clamp(12px,3.1vw,16px)!important;
+    line-height:1.25!important;
+    margin:0 0 8px!important;
+  }
+  .heroDescription{
+    font-size:clamp(9px,2.35vw,12px)!important;
+    line-height:1.55!important;
+    margin:0 0 7px!important;
+  }
+  .hero .btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin:7px 0 0;
+    padding:9px 5px;
+    font-size:8px;
+    letter-spacing:.7px;
+    border-radius:5px;
+    white-space:nowrap;
+  }
+}
+@media(max-width:380px){
+  .heroGrid{grid-template-columns:minmax(0,40%) minmax(0,60%);gap:8px}
+  .heroIntro h1{font-size:clamp(21px,6vw,27px)}
+  .heroDescription{font-size:9px!important}
+  .hero .btn{font-size:7px;letter-spacing:.4px;padding:8px 3px}
+}
+
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
