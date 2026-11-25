@@ -613,7 +613,7 @@ input,select{border-radius:8px;background:#11110f}
   .heroBannerActions .btn{font-size:5.5px;min-height:21px}
 }
 
-</style></head><body>
+.aboutGrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}.aboutIntro{max-width:520px}.clientMoments h3{font-size:22px;font-weight:500;margin:8px 0 16px}.clientMomentGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.clientMomentCard{overflow:hidden;border:1px solid #393329;border-radius:10px;background:#111}.clientMomentCard img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.clientMomentCaption{padding:12px}.clientMomentCaption strong{display:block;font-size:13px;font-weight:500}.clientMomentCaption small{display:block;color:#b5a994;font-size:10px;margin-top:5px}@media(max-width:720px){.aboutGrid{grid-template-columns:1fr;gap:32px}.clientMomentGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
   <img class="heroBannerImage" src="xaven-hero-banner.png" alt="Xaven Ting with the Kuala Lumpur skyline" fetchpriority="high">
@@ -648,7 +648,7 @@ input,select{border-radius:8px;background:#11110f}
 </optgroup>
 </select></div></div>
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
-<section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div></section>
+<section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><div class="aboutGrid"><div class="aboutIntro"><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div><div class="clientMoments"><div class="eyebrow">REAL PEOPLE · REAL MILESTONES</div><h3>Client Moments</h3><div class="clientMomentGrid" id="clientMomentGrid"><div class="muted">Loading client moments…</div></div></div></div></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Greater Klang Valley</span></div></div></section>
 <div class="detailOverlay" id="projectDetail" aria-hidden="true">
  <div class="detailShell">
@@ -782,6 +782,8 @@ async function loadPublishedProjects() {
     $("cards").innerHTML = '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">We could not load listings right now. Please try again later.</div>';
   }
 }
+async function loadClientMoments(){const box=document.getElementById("clientMomentGrid");if(!box)return;try{const snap=await getDocs(query(collection(db,"clientMoments"),where("status","==","Published")));const rows=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(Number(a.order)||99)-(Number(b.order)||99));box.innerHTML=rows.length?rows.map(m=>'<article class="clientMomentCard"><img src="'+esc(m.photo||"")+'" alt="'+esc(m.title||"Client milestone")+'" loading="lazy"><div class="clientMomentCaption"><strong>'+esc(m.title||"Client milestone")+'</strong><small>'+[m.project,m.date].filter(Boolean).map(esc).join(" · ")+'</small></div></article>').join(""):'<div class="muted">Client moments will be shared here soon.</div>';}catch(e){box.innerHTML='<div class="muted">Client moments are temporarily unavailable.</div>';console.error(e);}}
 syncTags();
 loadPublishedProjects();
+loadClientMoments();
 </script></body></html>
