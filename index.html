@@ -329,6 +329,43 @@ input,select{border-radius:8px;background:#11110f}
   .hero .btn{font-size:7px;letter-spacing:.4px;padding:8px 3px}
 }
 
+
+/* Mobile portrait emphasis: larger subject, full head and upper torso retained */
+@media(max-width:720px){
+  .heroGrid{
+    grid-template-columns:minmax(0,46%) minmax(0,54%);
+    gap:8px;
+    align-items:stretch;
+  }
+  .heroGrid .portrait{
+    width:100%;
+    aspect-ratio:4/5;
+    height:100%;
+    min-height:0;
+    align-self:stretch;
+    overflow:hidden;
+    background:transparent;
+  }
+  .heroGrid .portrait img{
+    width:100%;
+    height:100%;
+    object-fit:contain!important;
+    object-position:center center!important;
+    transform:scale(1.08);
+    transform-origin:center center;
+  }
+  .heroGrid .portrait:after{
+    background:
+      linear-gradient(90deg,transparent 58%,#0b0b0a 100%),
+      linear-gradient(180deg,transparent 78%,#0b0b0a55 100%);
+  }
+  .heroIntro{align-self:center}
+}
+@media(max-width:380px){
+  .heroGrid{grid-template-columns:minmax(0,44%) minmax(0,56%);gap:7px}
+  .heroGrid .portrait img{transform:scale(1.05)}
+}
+
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
