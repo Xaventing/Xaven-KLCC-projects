@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == "3LRiPf2z3iZtcTgIQPZeZtgrOVi2";
+    }
+
+    match /projects/{projectId} {
+      // Public visitors can read published projects; the admin can read all projects.
+      allow get, list: if isAdmin() || resource.data.status == "Published";
+      // Only the designated admin account can create, edit, or delete projects.
+      allow create, update, delete: if isAdmin();
+    }
+  }
+}
