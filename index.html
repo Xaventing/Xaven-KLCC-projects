@@ -6,6 +6,59 @@
 .detailOverlay{position:fixed;inset:0;background:#080808f2;z-index:20;overflow:auto;display:none}.detailOverlay.open{display:block}.detailShell{max-width:1050px;margin:0 auto;padding:22px 22px 60px}.detailTop{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:8px 0 22px;border-bottom:1px solid var(--line)}.detailBack,.galleryBtn{border:1px solid #62543d;background:#171614;color:var(--cream);padding:10px 14px;cursor:pointer}.detailTitle{font-size:clamp(27px,5vw,44px);margin:22px 0 4px}.detailGallery{position:relative;margin-top:22px;background:#181818}.detailMainImage{width:100%;height:min(58vw,540px);min-height:220px;object-fit:cover;display:block}.galleryControls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}.galleryBtn{pointer-events:auto;background:#101010bb;border-radius:50%;width:42px;height:42px;padding:0;font-size:20px}.galleryThumbs{display:flex;gap:8px;overflow:auto;padding:10px 0}.galleryThumbs img{width:82px;height:62px;object-fit:cover;opacity:.55;border:1px solid transparent;cursor:pointer;flex:0 0 auto}.galleryThumbs img.active{opacity:1;border-color:var(--gold)}.detailGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;margin-top:25px}.detailPanel{background:var(--panel);border:1px solid var(--line);padding:20px}.detailFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.fact{background:#111;padding:13px;border:1px solid var(--line)}.fact small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}.fact strong{display:block;margin-top:5px}.detailActions{display:grid;gap:10px;margin-top:16px}.detailActions a{display:block;text-align:center;padding:13px;background:var(--gold);color:#17130d;font-weight:bold;font-size:12px}.detailActions a.secondary{background:transparent;border:1px solid #756143;color:var(--cream)}.detailTags{margin-top:15px}@media(max-width:720px){.detailShell{padding:12px 14px 45px}.detailGrid{grid-template-columns:1fr;gap:14px}.detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}.detailMainImage{height:65vw}.detailTitle{margin-top:16px}}
 
 @media(max-width:720px){nav{display:none}.heroGrid{grid-template-columns:1fr;gap:28px}.portrait{justify-self:center;max-width:260px;grid-row:1}.cats{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.wrap{padding:0 17px}.hero{padding:48px 0}}
+
+/* XAVEN VISUAL POLISH — premium editorial black & gold */
+:root{--bg:#0b0b0a;--panel:#151513;--gold:#d0ad72;--cream:#f5f0e7;--muted:#a8a196;--line:#302d27}
+body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;letter-spacing:.01em;background:radial-gradient(ellipse at 50% -20%,#302516 0,transparent 42%),var(--bg)}
+.wrap{max-width:1240px}
+header{background:rgba(10,10,9,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:17px 0}
+.brand{font-size:19px;letter-spacing:4px}
+nav{gap:30px}nav a{color:#c8c1b5;transition:color .2s}nav a:hover,header .gold:hover{color:#fff}
+.hero{position:relative;overflow:hidden;padding:88px 0 96px;background:linear-gradient(105deg,#11100e 0%,#17140f 55%,#0b0b0a 100%);border-bottom:1px solid #51432e}
+.hero:after{content:"";position:absolute;width:540px;height:540px;border:1px solid #c7a36a22;border-radius:50%;right:-150px;top:-270px;box-shadow:0 0 0 45px #c7a36a08,0 0 0 95px #c7a36a05;pointer-events:none}
+.heroGrid{position:relative;z-index:1;gap:7vw}
+.hero h1{font-size:clamp(43px,6.2vw,76px);letter-spacing:-.045em;line-height:1.02;font-weight:500;max-width:760px}
+.hero p{font-size:16px;line-height:1.85;color:#c7c0b5;max-width:590px;margin:22px 0 8px}
+.eyebrow{font-size:10px;letter-spacing:3.4px}
+.portrait{width:min(100%,370px);border:1px solid #b18b55;box-shadow:16px 16px 0 -4px #171717,16px 16px 0 -3px #8c7047;position:relative}
+.btn{padding:15px 22px;letter-spacing:1.3px;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:#e0bd83}
+.btn.alt:hover{background:#c7a36a18}
+section{padding:76px 0}
+.head h2,#areas h2,.about h2{font-size:clamp(28px,3.4vw,39px);font-weight:500;letter-spacing:-.025em}
+.head p{font-size:14px}
+.cat,.card{border-color:#302d27;background:linear-gradient(145deg,#191916,#111110);transition:transform .25s,border-color .25s,background .25s}
+.cat{padding:23px;min-height:150px}
+.cat:hover,.cat.active{border-color:#a88756;background:linear-gradient(145deg,#282116,#171511);transform:translateY(-2px)}
+.cat h3{font-size:17px;font-weight:500}
+.cat p{line-height:1.7}
+.filters{border:1px solid #353027;background:#141412;padding:20px}
+input,select{border-radius:0;padding:14px 13px;border-color:#403b32;font:inherit}
+input:focus,select:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+.cards{gap:18px}
+.card{box-shadow:0 12px 35px #0003}
+.card:hover{transform:translateY(-5px);border-color:#a88756;box-shadow:0 18px 42px #0007}
+.photo{height:210px;background:linear-gradient(135deg,#554b3b,#191919)}
+.body{padding:21px}
+.body h3{font-size:19px;font-weight:500;letter-spacing:-.02em}
+.price{font-size:15px;color:#e2c18c}
+.pill{border-color:#514633;color:#d8c6a8;border-radius:2px;letter-spacing:.2px}
+.cardMore{letter-spacing:1.5px;font-size:10px}
+.about{background:linear-gradient(110deg,#171510,#11110f);border-block:1px solid #3a3327}
+.about p{font-size:15px;line-height:1.9}
+.areas span{padding:11px 15px;border-color:#403a30;color:#d4c9b8;transition:all .2s}
+.areas span:hover{border-color:var(--gold);color:var(--gold)}
+footer{padding:35px 0;color:#817b71}
+.detailOverlay{background:#080807f7;backdrop-filter:blur(12px)}
+.detailPanel{background:linear-gradient(145deg,#191916,#111110);border-color:#39342b}
+.detailTitle{font-weight:500;letter-spacing:-.035em}
+.detailMainImage{background:#161613}
+.detailActions a{letter-spacing:1px}
+@media(max-width:720px){
+ .hero{padding:48px 0 58px}.heroGrid{gap:32px}.hero h1{font-size:clamp(39px,11vw,55px)}.hero p{font-size:14px}
+ section{padding:55px 0}.photo{height:220px}.cat{min-height:135px;padding:17px}
+ .nav{gap:10px}.brand{font-size:17px}header .gold{font-size:10px;letter-spacing:1px}
+}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><h1>Hi, I'm <span class="gold">Xaven Ting.</span><br>Find a property that fits your next move.</h1><p>Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div></div></section>
