@@ -93,6 +93,37 @@ input,select{border-radius:8px;background:#11110f}
 .detailBack:hover,.galleryBtn:hover{border-color:var(--gold);background:#2a2419}
 .detailActions a{border-radius:8px;box-shadow:0 6px 18px #c7a36a18}
 .detailActions a.secondary{box-shadow:none}
+/* Image-first compact project tiles: all key details sit softly over the photo */
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{position:relative;padding:0;border-radius:12px;overflow:hidden;aspect-ratio:4/3;min-height:0;background:#111;border:1px solid #393329;cursor:pointer}
+.card:hover{transform:translateY(-3px);border-color:#9d7d4e}
+.card .photo{position:absolute;inset:0;height:auto;padding:0;display:block;letter-spacing:0}
+.card .photo>img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.card:hover .photo>img{transform:scale(1.035)}
+.card .photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#08080718 25%,#08080735 48%,#080807d9 100%);pointer-events:none}
+.cardOverlay{position:absolute;z-index:2;left:17px;right:17px;bottom:15px;color:#f5f0e7;text-shadow:0 1px 8px #0009}
+.cardArea{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#e1c99f;opacity:.92;margin-bottom:3px}
+.cardName{font-size:clamp(16px,1.7vw,21px);font-weight:500;line-height:1.25;letter-spacing:-.02em;margin:0 0 5px}
+.cardStarting{font-size:12px;letter-spacing:.2px;color:#f0e5d2;opacity:.92}
+.cardStarting strong{font-weight:600;color:#e6c995}
+.card .body{display:none}
+.card.expanded{aspect-ratio:auto;min-height:0;overflow:hidden}
+.card.expanded .photo{position:relative;inset:auto;aspect-ratio:4/3}
+.card.expanded .body{display:block;padding:15px 17px 17px;background:linear-gradient(145deg,#191916,#111110)}
+.card.expanded .projectExpand{display:block;margin:0;padding:0;border:0}
+.card.expanded .projectCardActions{margin-top:13px;justify-content:flex-end}
+.card.expanded .learnBtn{display:none}
+.card.expanded .viewBtn{padding:9px 13px}
+@media(max-width:720px){
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .card{aspect-ratio:4/3;border-radius:10px}
+ .cardOverlay{left:12px;right:12px;bottom:11px}
+ .cardArea{font-size:8px;letter-spacing:1.5px}
+ .cardName{font-size:16px}
+ .cardStarting{font-size:11px}
+ .card.expanded .photo{aspect-ratio:4/3}
+}
+@media(max-width:420px){.cards{grid-template-columns:1fr}.card{aspect-ratio:16/10}}
 @media(max-width:720px){
  .hero{padding:48px 0 58px}.heroGrid{gap:32px}.hero h1{font-size:clamp(39px,11vw,55px)}.hero p{font-size:14px}
  section{padding:55px 0}.photo{height:220px}.cat{min-height:135px;padding:17px}
@@ -154,10 +185,10 @@ function render() {
   );
   $("count").textContent = rows.length + " published projects";
   $("cards").innerHTML = rows.length ? rows.map(x =>
-    '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':'<span style="position:relative;z-index:1">PROJECT IMAGE</span>')+'<span style="position:absolute;z-index:1;left:14px;bottom:13px;text-shadow:0 1px 5px #000;background:#090908a8;padding:5px 9px;border-radius:4px">'+esc((x.a||"").toUpperCase())+'</span></div><div class="body"><h3>'+esc(x.n)+'</h3><div class="projectMeta"><div class="projectPrice">'+priceLabel(x.p)+'</div><div class="projectLocation"><span>⌖</span>'+esc(x.a||"Kuala Lumpur")+'</div></div>'+
-    '<div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
-    '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div>'+
-    '</div></article>'
+    '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy">':'<div style="position:absolute;inset:0;background:linear-gradient(135deg,#554b3b,#191919)"></div>')+
+    '<div class="cardOverlay"><div class="cardArea">'+esc(x.a||"Kuala Lumpur")+'</div><h3 class="cardName">'+esc(x.n)+'</h3><div class="cardStarting">Starting from <strong>'+priceLabel(x.p).replace(/^From /,"")+'</strong></div></div></div>'+
+    '<div class="body"><div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
+    '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div></div></article>'
   ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
 }
 let activeGalleryProject=null,activeGalleryIndex=0;
@@ -186,9 +217,12 @@ function closeProjectDetail(clearHash=true){
  if(clearHash&&location.hash.startsWith("#project/"))history.replaceState({},"",location.pathname+location.search);
 }
 $("cards").addEventListener("click",e=>{
- const action=e.target.closest("[data-action]");const card=e.target.closest("[data-project-id]");if(!card)return;
- if(action?.dataset.action==="expand"){const expanded=card.classList.toggle("expanded");action.textContent=expanded?"SHOW LESS −":"LEARN MORE +";return;}
- if(action?.dataset.action==="view")openProjectDetail(card.dataset.projectId);
+ const card=e.target.closest("[data-project-id]");if(!card)return;
+ const action=e.target.closest("[data-action]");
+ if(action?.dataset.action==="view"){e.stopPropagation();openProjectDetail(card.dataset.projectId);return;}
+ if(action?.dataset.action==="expand"){e.stopPropagation();const expanded=card.classList.toggle("expanded");action.textContent=expanded?"SHOW LESS −":"LEARN MORE +";return;}
+ if(!card.classList.contains("expanded")){card.classList.add("expanded");const btn=card.querySelector('[data-action="expand"]');if(btn)btn.textContent="SHOW LESS −";}
+ else {card.classList.remove("expanded");const btn=card.querySelector('[data-action="expand"]');if(btn)btn.textContent="LEARN MORE +";}
 });
 $("detailBack").addEventListener("click",()=>closeProjectDetail());
 $("projectDetail").addEventListener("click",e=>{if(e.target.id==="projectDetail")closeProjectDetail();});
