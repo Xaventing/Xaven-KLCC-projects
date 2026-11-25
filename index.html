@@ -181,6 +181,80 @@ input,select{border-radius:8px;background:#11110f}
    radial-gradient(ellipse at 50% 44%,transparent 53%,#0b0b0a22 75%,#0b0b0a 100%);
  }
 }
+
+/* XAVEN HERO — landscape split inspired by the supplied reference */
+.hero{
+  min-height:min(56.25vw,820px);
+  display:flex;
+  align-items:center;
+  padding:clamp(48px,6vw,88px) 0;
+  background:
+    radial-gradient(ellipse at 24% 48%,#5a463022 0%,transparent 42%),
+    linear-gradient(90deg,#11100e 0%,#11100e 48%,#0b0b0a 100%);
+  border-bottom:0;
+}
+.heroGrid{
+  width:100%;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
+  gap:clamp(28px,5vw,76px);
+  align-items:center;
+}
+.heroGrid .portrait{
+  grid-column:1;grid-row:1;
+  width:100%;max-width:none;
+  aspect-ratio:5/4;
+  justify-self:stretch;
+  overflow:hidden;border:0;box-shadow:none;
+  background:transparent;
+}
+.heroGrid .portrait img{
+  width:100%;height:100%;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+.heroGrid .portrait:after{
+  background:
+    linear-gradient(90deg,transparent 62%,#0b0b0a 100%),
+    linear-gradient(180deg,#0b0b0a18 0%,transparent 24%,transparent 88%,#0b0b0a66 100%),
+    radial-gradient(ellipse at 45% 46%,transparent 55%,#0b0b0a18 78%,#0b0b0a66 100%);
+}
+.heroIntro{grid-column:2;grid-row:1;max-width:660px;padding:clamp(0px,2vw,24px) 0}
+.heroGreeting{
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-size:clamp(25px,3vw,42px);font-style:italic;
+  letter-spacing:.015em;color:#d9c9ad;margin:0 0 2px;
+}
+.heroIntro h1{
+  font-family:"Cormorant Garamond","Bodoni 72","Times New Roman",serif;
+  font-size:clamp(58px,6.8vw,100px);font-weight:500;
+  letter-spacing:-.055em;line-height:.96;margin:0 0 22px;
+}
+.heroLead{
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-size:clamp(22px,2.3vw,34px)!important;
+  line-height:1.25!important;color:#e8ddca!important;
+  max-width:560px!important;margin:0 0 18px!important;
+}
+.heroDescription{font-size:clamp(13px,1.1vw,15px)!important;line-height:1.9!important;max-width:540px!important;color:#aaa49a!important}
+.hero .eyebrow{letter-spacing:4px;font-size:10px}
+@media(max-width:720px){
+  .hero{min-height:0;display:block;padding:42px 0 54px}
+  .heroGrid{grid-template-columns:1fr;gap:24px}
+  .heroGrid .portrait{
+    grid-column:1;grid-row:1;width:100%;max-width:430px;
+    aspect-ratio:5/4;justify-self:center;
+  }
+  .heroGrid .portrait:after{
+    background:
+      linear-gradient(90deg,transparent 70%,#0b0b0a 100%),
+      linear-gradient(180deg,transparent 76%,#0b0b0a66 100%);
+  }
+  .heroIntro{grid-column:1;grid-row:2;padding:0}
+  .heroGreeting{font-size:25px}
+  .heroIntro h1{font-size:clamp(54px,14vw,76px);margin-bottom:16px}
+  .heroLead{font-size:25px!important}
+  .heroDescription{font-size:13px!important}
+}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
@@ -328,111 +402,3 @@ async function loadPublishedProjects() {
 syncTags();
 loadPublishedProjects();
 </script></body></html>
-
-/* XAVEN HERO — 16:9 landscape brand composition */
-.hero{
-  min-height:min(56.25vw,1080px);
-  display:flex;
-  align-items:center;
-  padding:clamp(54px,6vw,112px) 0;
-  background:
-    radial-gradient(ellipse at 22% 48%,#5a463022 0%,transparent 42%),
-    linear-gradient(90deg,#11100e 0%,#11100e 48%,#0b0b0a 100%);
-  border-bottom:0;
-}
-.heroGrid{
-  width:100%;
-  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
-  gap:clamp(38px,6vw,110px);
-  align-items:center;
-}
-.heroGrid .portrait{
-  grid-column:1;
-  grid-row:1;
-  width:100%;
-  max-width:none;
-  aspect-ratio:4/5;
-  justify-self:stretch;
-  overflow:hidden;
-  border:0;
-  box-shadow:none;
-  background:transparent;
-}
-.heroGrid .portrait img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 18%;
-}
-.heroGrid .portrait:after{
-  background:
-    linear-gradient(90deg,transparent 48%,#0b0b0a 100%),
-    linear-gradient(180deg,#0b0b0a55 0%,transparent 18%,transparent 76%,#0b0b0a 100%),
-    radial-gradient(ellipse at 42% 46%,transparent 48%,#0b0b0a22 72%,#0b0b0a 100%);
-}
-.heroIntro{
-  grid-column:2;
-  grid-row:1;
-  max-width:660px;
-  padding:clamp(0px,2vw,24px) 0;
-}
-.heroGreeting{
-  font-family:"Cormorant Garamond", "Times New Roman", serif;
-  font-size:clamp(25px,3vw,42px);
-  font-style:italic;
-  letter-spacing:.015em;
-  color:#d9c9ad;
-  margin:0 0 2px;
-}
-.heroIntro h1{
-  font-family:"Cormorant Garamond", "Bodoni 72", "Times New Roman", serif;
-  font-size:clamp(62px,7.2vw,112px);
-  font-weight:500;
-  letter-spacing:-.055em;
-  line-height:.94;
-  margin:0 0 24px;
-}
-.heroLead{
-  font-family:"Cormorant Garamond","Times New Roman",serif;
-  font-size:clamp(23px,2.6vw,36px)!important;
-  line-height:1.25!important;
-  color:#e8ddca!important;
-  max-width:560px!important;
-  margin:0 0 20px!important;
-}
-.heroDescription{
-  font-size:clamp(13px,1.1vw,15px)!important;
-  line-height:1.9!important;
-  max-width:540px!important;
-  color:#aaa49a!important;
-}
-.hero .eyebrow{letter-spacing:4px;font-size:10px}
-@media(max-width:720px){
-  .hero{
-    min-height:0;
-    display:block;
-    padding:42px 0 54px;
-  }
-  .heroGrid{
-    grid-template-columns:1fr;
-    gap:24px;
-  }
-  .heroGrid .portrait{
-    grid-column:1;
-    grid-row:1;
-    width:100%;
-    max-width:430px;
-    aspect-ratio:4/5;
-    justify-self:center;
-  }
-  .heroGrid .portrait:after{
-    background:
-      linear-gradient(180deg,transparent 55%,#0b0b0a 100%),
-      radial-gradient(ellipse at 50% 42%,transparent 50%,#0b0b0a22 76%,#0b0b0a 100%);
-  }
-  .heroIntro{grid-column:1;grid-row:2;padding:0}
-  .heroGreeting{font-size:25px}
-  .heroIntro h1{font-size:clamp(54px,14vw,76px);margin-bottom:16px}
-  .heroLead{font-size:25px!important}
-  .heroDescription{font-size:13px!important}
-}
