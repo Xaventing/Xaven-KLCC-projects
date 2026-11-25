@@ -14,11 +14,92 @@
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Greater Klang Valley</span></div></div></section>
 <footer><div class="wrap">© 2026 XAVEN TING · PROPERTY DISCOVERY · Project prices and foreign-buyer eligibility are subject to verification.</div></footer>
-<script>
-const data=[{n:"Divine KLCC",a:"KLCC",t:"Luxury Residence",p:"Price on request",d:"Project showcase",tags:["Foreigner Friendly","Investment Friendly","Luxury Living"]},{n:"M Aurora",a:"Old Klang Road",t:"Condominium",p:"Price on request",d:"Mah Sing",tags:["First Home Buyer","Investment Friendly","Renter Friendly","Family Living"]},{n:"M Nova",a:"Setapak",t:"Condominium",p:"Price on request",d:"Mah Sing",tags:["First Home Buyer","Investment Friendly","Renter Friendly","Near MRT / LRT"]},{n:"M Aria",a:"Sentul",t:"Condominium",p:"Price on request",d:"Mah Sing",tags:["First Home Buyer","Investment Friendly","Family Living"]},{n:"KLCC Residence Collection",a:"KLCC",t:"Serviced Residence",p:"Price on request",d:"Curated collection",tags:["Foreigner Friendly","Investment Friendly","Renter Friendly","Luxury Living"]}];
-let chosen=new Set(["Foreigner Friendly"]);const $=id=>document.getElementById(id);
-function render(){let q=$("q").value.toLowerCase(),a=$("area").value,t=$("type").value;let rows=data.filter(x=>(!q||(x.n+" "+x.d).toLowerCase().includes(q))&&(!a||x.a===a)&&(!t||x.t===t)&&(!chosen.size||x.tags.some(v=>chosen.has(v))));$("count").textContent=rows.length+" matching sample projects";$("cards").innerHTML=rows.length?rows.map(x=>'<article class="card"><div class="photo">'+x.a.toUpperCase()+' · '+x.t.toUpperCase()+'</div><div class="body"><h3>'+x.n+'</h3><div class="loc">'+x.a.toUpperCase()+' · KUALA LUMPUR</div><div class="price">'+x.p+'</div>'+x.tags.map(v=>'<span class="pill">'+v+'</span>').join('')+'<p style="font-size:11px;color:#aaa49a">'+x.d+'</p></div></article>').join(''):'<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No matching sample projects. Try another filter.</div>'}
-function sync(){document.querySelectorAll("[data-tag]").forEach(e=>e.classList.toggle("active",chosen.has(e.dataset.tag)))}
-document.querySelectorAll("[data-tag]").forEach(e=>e.addEventListener("click",()=>{let v=e.dataset.tag;if(e.classList.contains("cat")){chosen=new Set([v])}else{chosen.has(v)?chosen.delete(v):chosen.add(v)}sync();render()}));
-["q","area","type"].forEach(id=>$(id).addEventListener(id==="q"?"input":"change",render));render();
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyANGPi5f6c9KlmFFsbkbEN2GDA_uTAWcUk",
+  authDomain: "xaven-property-discovery.firebaseapp.com",
+  projectId: "xaven-property-discovery",
+  storageBucket: "xaven-property-discovery.firebasestorage.app",
+  messagingSenderId: "681778464807",
+  appId: "1:681778464807:web:a65d35332aa547f3a0e602",
+  measurementId: "G-4X4PKBLK7H"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+let data = [];
+let chosen = new Set(["Foreigner Friendly"]);
+const $ = id => document.getElementById(id);
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function priceLabel(value) {
+  if (value === null || value === undefined || value === "") return "Price on request";
+  const n = Number(String(value).replace(/[^0-9.]/g, ""));
+  return Number.isFinite(n) && n > 0 ? "From RM " + n.toLocaleString("en-MY") : esc(value);
+}
+function render() {
+  const q = $("q").value.toLowerCase().trim(), area = $("area").value, type = $("type").value;
+  const rows = data.filter(x =>
+    (!q || (x.n+" "+x.d+" "+x.desc).toLowerCase().includes(q)) &&
+    (!area || x.a === area) &&
+    (!type || x.t === type) &&
+    (!chosen.size || x.tags.some(v => chosen.has(v)))
+  );
+  $("count").textContent = rows.length + " published projects";
+  $("cards").innerHTML = rows.length ? rows.map(x =>
+    '<article class="card"><div class="photo">'+esc(x.a.toUpperCase())+' · '+esc(x.t.toUpperCase())+'</div><div class="body"><h3>'+esc(x.n)+'</h3><div class="loc">'+esc(x.a.toUpperCase())+' · KUALA LUMPUR</div><div class="price">'+priceLabel(x.p)+'</div>'+
+    x.tags.map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+
+    '<p style="font-size:11px;color:#aaa49a">'+esc(x.d)+'</p>'+
+    (x.desc?'<p>'+esc(x.desc)+'</p>':'')+
+    (x.brochure?'<p><a target="_blank" rel="noopener" href="'+esc(x.brochure)+'">View brochure / details</a></p>':'')+
+    '</div></article>'
+  ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
+}
+function syncTags() {
+  document.querySelectorAll("[data-tag]").forEach(e => e.classList.toggle("active", chosen.has(e.dataset.tag)));
+}
+document.querySelectorAll("[data-tag]").forEach(e => e.addEventListener("click", () => {
+  const v=e.dataset.tag;
+  if(e.classList.contains("cat")) chosen=new Set([v]);
+  else chosen.has(v)?chosen.delete(v):chosen.add(v);
+  syncTags(); render();
+}));
+["q","area","type"].forEach(id => $(id).addEventListener(id==="q"?"input":"change",render));
+
+async function loadPublishedProjects() {
+  $("count").textContent = "Loading published projects…";
+  try {
+    const publishedQuery = query(collection(db,"projects"),where("status","==","Published"));
+    const snapshot = await getDocs(publishedQuery);
+    data = snapshot.docs.map(d => {
+      const p=d.data();
+      return {
+        id:d.id,
+        n:p.name || "Untitled project",
+        a:p.location || "",
+        t:p.type || "Property",
+        p:p.price || "",
+        d:p.developer || "Project details",
+        desc:p.description || "",
+        brochure:p.brochure || "",
+        tags:Array.isArray(p.tags)?p.tags:[],
+        featured:!!p.featured,
+        order:Number(p.order)||99
+      };
+    }).sort((a,b)=>(a.order-b.order)||a.n.localeCompare(b.n));
+    render();
+  } catch (error) {
+    console.error("Could not load published projects:",error);
+    $("count").textContent = "Project listings are temporarily unavailable.";
+    $("cards").innerHTML = '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">We could not load listings right now. Please try again later.</div>';
+  }
+}
+syncTags();
+loadPublishedProjects();
 </script></body></html>
