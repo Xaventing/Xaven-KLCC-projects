@@ -328,3 +328,111 @@ async function loadPublishedProjects() {
 syncTags();
 loadPublishedProjects();
 </script></body></html>
+
+/* XAVEN HERO — 16:9 landscape brand composition */
+.hero{
+  min-height:min(56.25vw,1080px);
+  display:flex;
+  align-items:center;
+  padding:clamp(54px,6vw,112px) 0;
+  background:
+    radial-gradient(ellipse at 22% 48%,#5a463022 0%,transparent 42%),
+    linear-gradient(90deg,#11100e 0%,#11100e 48%,#0b0b0a 100%);
+  border-bottom:0;
+}
+.heroGrid{
+  width:100%;
+  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  gap:clamp(38px,6vw,110px);
+  align-items:center;
+}
+.heroGrid .portrait{
+  grid-column:1;
+  grid-row:1;
+  width:100%;
+  max-width:none;
+  aspect-ratio:4/5;
+  justify-self:stretch;
+  overflow:hidden;
+  border:0;
+  box-shadow:none;
+  background:transparent;
+}
+.heroGrid .portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 18%;
+}
+.heroGrid .portrait:after{
+  background:
+    linear-gradient(90deg,transparent 48%,#0b0b0a 100%),
+    linear-gradient(180deg,#0b0b0a55 0%,transparent 18%,transparent 76%,#0b0b0a 100%),
+    radial-gradient(ellipse at 42% 46%,transparent 48%,#0b0b0a22 72%,#0b0b0a 100%);
+}
+.heroIntro{
+  grid-column:2;
+  grid-row:1;
+  max-width:660px;
+  padding:clamp(0px,2vw,24px) 0;
+}
+.heroGreeting{
+  font-family:"Cormorant Garamond", "Times New Roman", serif;
+  font-size:clamp(25px,3vw,42px);
+  font-style:italic;
+  letter-spacing:.015em;
+  color:#d9c9ad;
+  margin:0 0 2px;
+}
+.heroIntro h1{
+  font-family:"Cormorant Garamond", "Bodoni 72", "Times New Roman", serif;
+  font-size:clamp(62px,7.2vw,112px);
+  font-weight:500;
+  letter-spacing:-.055em;
+  line-height:.94;
+  margin:0 0 24px;
+}
+.heroLead{
+  font-family:"Cormorant Garamond","Times New Roman",serif;
+  font-size:clamp(23px,2.6vw,36px)!important;
+  line-height:1.25!important;
+  color:#e8ddca!important;
+  max-width:560px!important;
+  margin:0 0 20px!important;
+}
+.heroDescription{
+  font-size:clamp(13px,1.1vw,15px)!important;
+  line-height:1.9!important;
+  max-width:540px!important;
+  color:#aaa49a!important;
+}
+.hero .eyebrow{letter-spacing:4px;font-size:10px}
+@media(max-width:720px){
+  .hero{
+    min-height:0;
+    display:block;
+    padding:42px 0 54px;
+  }
+  .heroGrid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  .heroGrid .portrait{
+    grid-column:1;
+    grid-row:1;
+    width:100%;
+    max-width:430px;
+    aspect-ratio:4/5;
+    justify-self:center;
+  }
+  .heroGrid .portrait:after{
+    background:
+      linear-gradient(180deg,transparent 55%,#0b0b0a 100%),
+      radial-gradient(ellipse at 50% 42%,transparent 50%,#0b0b0a22 76%,#0b0b0a 100%);
+  }
+  .heroIntro{grid-column:1;grid-row:2;padding:0}
+  .heroGreeting{font-size:25px}
+  .heroIntro h1{font-size:clamp(54px,14vw,76px);margin-bottom:16px}
+  .heroLead{font-size:25px!important}
+  .heroDescription{font-size:13px!important}
+}
