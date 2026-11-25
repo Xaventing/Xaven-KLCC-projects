@@ -2,6 +2,9 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xaven Ting | Property Discovery</title>
 <style>
 :root{--bg:#101010;--panel:#191919;--gold:#c7a36a;--cream:#f4efe6;--muted:#aaa49a;--line:#34312c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--cream);font:15px/1.55 Arial,sans-serif}.wrap{max-width:1160px;margin:auto;padding:0 24px}header{position:sticky;top:0;background:#101010ee;border-bottom:1px solid var(--line);padding:20px 0;z-index:3}.nav{display:flex;justify-content:space-between;align-items:center}.brand{font-weight:bold;letter-spacing:3px;font-size:20px}.brand span,.gold{color:var(--gold)}nav{display:flex;gap:24px;font-size:13px}a{color:inherit;text-decoration:none}.hero{padding:70px 0;background:radial-gradient(ellipse at 75% 10%,#59452a44,transparent 40%),#141414;border-bottom:1px solid var(--line)}.heroGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:45px;align-items:center}.eyebrow{color:var(--gold);letter-spacing:3px;font-size:11px;font-weight:bold}.hero h1{font-size:clamp(38px,5vw,62px);line-height:1.08;margin:18px 0}.hero p{color:#c3bdb3;max-width:580px}.portrait{width:min(100%,350px);aspect-ratio:4/5;justify-self:end;border:1px solid #756143;background:linear-gradient(145deg,#51483d,#211f1d);display:grid;place-items:center;color:#d7c19b;font-size:13px;letter-spacing:2px;box-shadow:12px 12px 0 -3px #171717,12px 12px 0 -2px #8c7047}.btn{display:inline-block;margin:15px 10px 0 0;padding:13px 18px;background:var(--gold);color:#17130d;font-size:12px;font-weight:bold}.btn.alt{background:transparent;border:1px solid #786548;color:var(--cream)}section{padding:58px 0}.head{margin-bottom:24px}.head h2{font-size:29px;margin:5px 0}.head p{color:var(--muted);font-size:13px}.cats,.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.cat,.card{background:var(--panel);border:1px solid var(--line);padding:19px}.cat{cursor:pointer}.cat:hover,.cat.active{border-color:var(--gold);background:#282218}.cat small{color:var(--gold);letter-spacing:1px}.cat h3{font-size:16px;margin:10px 0 4px}.cat p{font-size:12px;color:var(--muted);margin:0}.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;background:var(--panel);padding:18px;margin:24px 0}.filters label{display:block;font-size:10px;color:var(--muted);margin-bottom:6px;letter-spacing:1px}input,select{width:100%;padding:12px;background:#101010;color:var(--cream);border:1px solid #45413a}.tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.tag{padding:7px 11px;border:1px solid #514a3e;border-radius:20px;color:#d4c7b2;background:transparent;cursor:pointer;font-size:11px}.tag.active{background:var(--gold);color:#17130d}.cards{grid-template-columns:repeat(3,1fr)}.card{padding:0;overflow:hidden}.photo{height:160px;position:relative;overflow:hidden;background:linear-gradient(135deg,#554b3b,#191919);display:flex;align-items:end;padding:14px;color:#e4d2b3;font-size:10px;letter-spacing:2px}.body{padding:17px}.body h3{margin:0}.loc{font-size:10px;color:var(--gold);letter-spacing:1px;margin-top:4px}.price{margin:13px 0;color:#e4d2b3}.pill{display:inline-block;border:1px solid #514a3e;padding:5px 7px;margin:2px;font-size:9px;color:#c9c0b2}.about{background:#171614;border-block:1px solid var(--line)}.about p{color:#bcb5aa;max-width:750px}.areas{display:flex;flex-wrap:wrap;gap:9px}.areas span{border:1px solid var(--line);padding:9px 12px;font-size:11px}footer{padding:30px 0;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+.card{cursor:pointer;transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:var(--gold)}.cardMore{display:inline-block;margin-top:12px;color:var(--gold);font-size:11px;letter-spacing:1px}
+.detailOverlay{position:fixed;inset:0;background:#080808f2;z-index:20;overflow:auto;display:none}.detailOverlay.open{display:block}.detailShell{max-width:1050px;margin:0 auto;padding:22px 22px 60px}.detailTop{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:8px 0 22px;border-bottom:1px solid var(--line)}.detailBack,.galleryBtn{border:1px solid #62543d;background:#171614;color:var(--cream);padding:10px 14px;cursor:pointer}.detailTitle{font-size:clamp(27px,5vw,44px);margin:22px 0 4px}.detailGallery{position:relative;margin-top:22px;background:#181818}.detailMainImage{width:100%;height:min(58vw,540px);min-height:220px;object-fit:cover;display:block}.galleryControls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;pointer-events:none}.galleryBtn{pointer-events:auto;background:#101010bb;border-radius:50%;width:42px;height:42px;padding:0;font-size:20px}.galleryThumbs{display:flex;gap:8px;overflow:auto;padding:10px 0}.galleryThumbs img{width:82px;height:62px;object-fit:cover;opacity:.55;border:1px solid transparent;cursor:pointer;flex:0 0 auto}.galleryThumbs img.active{opacity:1;border-color:var(--gold)}.detailGrid{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;margin-top:25px}.detailPanel{background:var(--panel);border:1px solid var(--line);padding:20px}.detailFacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.fact{background:#111;padding:13px;border:1px solid var(--line)}.fact small{display:block;color:var(--muted);font-size:10px;letter-spacing:1px}.fact strong{display:block;margin-top:5px}.detailActions{display:grid;gap:10px;margin-top:16px}.detailActions a{display:block;text-align:center;padding:13px;background:var(--gold);color:#17130d;font-weight:bold;font-size:12px}.detailActions a.secondary{background:transparent;border:1px solid #756143;color:var(--cream)}.detailTags{margin-top:15px}@media(max-width:720px){.detailShell{padding:12px 14px 45px}.detailGrid{grid-template-columns:1fr;gap:14px}.detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}.detailMainImage{height:65vw}.detailTitle{margin-top:16px}}
+
 @media(max-width:720px){nav{display:none}.heroGrid{grid-template-columns:1fr;gap:28px}.portrait{justify-self:center;max-width:260px;grid-row:1}.cats{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.wrap{padding:0 17px}.hero{padding:48px 0}}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
@@ -13,6 +16,12 @@
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Greater Klang Valley</span></div></div></section>
+<div class="detailOverlay" id="projectDetail" aria-hidden="true">
+ <div class="detailShell">
+  <div class="detailTop"><button class="detailBack" id="detailBack">← BACK TO PROJECTS</button><span class="eyebrow">XAVEN PROPERTY DISCOVERY</span></div>
+  <div id="detailContent"></div>
+ </div>
+</div>
 <footer><div class="wrap">© 2026 XAVEN TING · PROPERTY DISCOVERY · Project prices and foreign-buyer eligibility are subject to verification.</div></footer>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
@@ -53,14 +62,44 @@ function render() {
   );
   $("count").textContent = rows.length + " published projects";
   $("cards").innerHTML = rows.length ? rows.map(x =>
-    '<article class="card"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':'')+'<span style="position:relative;z-index:1;text-shadow:0 1px 4px #000">'+esc(x.a.toUpperCase())+' · '+esc(x.t.toUpperCase())+'</span></div><div class="body"><h3>'+esc(x.n)+'</h3><div class="loc">'+esc(x.a.toUpperCase())+' · KUALA LUMPUR</div><div class="price">'+priceLabel(x.p)+'</div>'+
+    '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">':'')+'<span style="position:relative;z-index:1;text-shadow:0 1px 4px #000">'+esc(x.a.toUpperCase())+' · '+esc(x.t.toUpperCase())+'</span></div><div class="body"><h3>'+esc(x.n)+'</h3><div class="loc">'+esc(x.a.toUpperCase())+' · KUALA LUMPUR</div><div class="price">'+priceLabel(x.p)+'</div>'+
     x.tags.map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+
     '<p style="font-size:11px;color:#aaa49a">'+esc(x.d)+'</p>'+
     (x.desc?'<p>'+esc(x.desc)+'</p>':'')+
-    (x.brochure?'<p><a target="_blank" rel="noopener" href="'+esc(x.brochure)+'">View brochure / details</a></p>':'')+
+    '<span class="cardMore">VIEW PROJECT DETAILS ↗</span>'+
     '</div></article>'
   ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
 }
+let activeGalleryProject=null,activeGalleryIndex=0;
+function openProjectDetail(id,updateHash=true){
+ const p=data.find(item=>item.id===id);if(!p)return;
+ activeGalleryProject=p;activeGalleryIndex=0;
+ const photos=p.photos||[];
+ const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more details?");
+ const fact=(label,value)=>value?'<div class="fact"><small>'+label+'</small><strong>'+esc(value)+'</strong></div>':'';
+ $("detailContent").innerHTML=
+  '<div class="eyebrow">'+esc((p.a||"").toUpperCase())+' · '+esc((p.t||"PROPERTY").toUpperCase())+'</div>'+
+  '<h1 class="detailTitle">'+esc(p.n)+'</h1>'+
+  '<div class="loc">'+esc(p.d||"")+'</div>'+
+  '<div class="detailGallery">'+(photos.length?'<img class="detailMainImage" id="detailMainImage" src="'+esc(photos[0])+'" alt="'+esc(p.n)+'">':'<div class="detailMainImage" style="display:grid;place-items:center;color:#c7a36a">PROJECT GALLERY</div>')+
+  (photos.length>1?'<div class="galleryControls"><button class="galleryBtn" id="galleryPrev" aria-label="Previous photo">‹</button><button class="galleryBtn" id="galleryNext" aria-label="Next photo">›</button></div>':'')+'</div>'+
+  (photos.length>1?'<div class="galleryThumbs">'+photos.map((src,i)=>'<img src="'+esc(src)+'" data-gallery-index="'+i+'" class="'+(i===0?'active':'')+'" alt="Project photo '+(i+1)+'">').join('')+'</div>':'')+
+  '<div class="detailGrid"><div class="detailPanel"><div class="eyebrow">PROJECT OVERVIEW</div><h2>About this project</h2><p style="color:#c3bdb3;white-space:pre-line">'+esc(p.desc||"Contact Xaven for more project information.")+'</p><div class="detailFacts">'+fact("STARTING PRICE",priceLabel(p.p))+fact("UNIT SIZE",p.size)+fact("BEDROOMS",p.bedrooms)+fact("COMPLETION",p.completion)+fact("LOCATION",p.a)+fact("PROPERTY TYPE",p.t)+'</div><div class="detailTags">'+(p.tags||[]).map(t=>'<span class="pill">'+esc(t)+'</span>').join('')+'</div></div>'+
+  '<aside class="detailPanel"><div class="eyebrow">TAKE THE NEXT STEP</div><h2>Interested in this property?</h2><p class="muted">Get the latest availability, layouts and pricing from Xaven.</p><div class="detailActions"><a href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN ↗</a>'+(p.brochure?'<a class="secondary" href="'+esc(p.brochure)+'" target="_blank" rel="noopener">VIEW BROCHURE</a>':'')+(p.floorplan?'<a class="secondary" href="'+esc(p.floorplan)+'" target="_blank" rel="noopener">VIEW FLOOR PLAN</a>':'')+'</div></aside></div>';
+ $("projectDetail").classList.add("open");$("projectDetail").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+ if(updateHash)history.pushState({projectId:id},"","#project/"+encodeURIComponent(id));
+ const setGallery=i=>{activeGalleryIndex=(i+photos.length)%photos.length;const img=$("detailMainImage");if(img)img.src=photos[activeGalleryIndex];document.querySelectorAll("[data-gallery-index]").forEach(el=>el.classList.toggle("active",Number(el.dataset.galleryIndex)===activeGalleryIndex));};
+ if(photos.length>1){$("galleryPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("galleryNext").onclick=()=>setGallery(activeGalleryIndex+1);document.querySelectorAll("[data-gallery-index]").forEach(el=>el.onclick=()=>setGallery(Number(el.dataset.galleryIndex)));}
+}
+function closeProjectDetail(clearHash=true){
+ $("projectDetail").classList.remove("open");$("projectDetail").setAttribute("aria-hidden","true");document.body.style.overflow="";
+ if(clearHash&&location.hash.startsWith("#project/"))history.replaceState({},"",location.pathname+location.search);
+}
+$("cards").addEventListener("click",e=>{const card=e.target.closest("[data-project-id]");if(card)openProjectDetail(card.dataset.projectId);});
+$("detailBack").addEventListener("click",()=>closeProjectDetail());
+$("projectDetail").addEventListener("click",e=>{if(e.target.id==="projectDetail")closeProjectDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
+window.addEventListener("popstate",()=>{const match=location.hash.match(/^#project\/(.+)$/);if(match)openProjectDetail(decodeURIComponent(match[1]),false);else closeProjectDetail(false);});
 function syncTags() {
   document.querySelectorAll("[data-tag]").forEach(e => e.classList.toggle("active", chosen.has(e.dataset.tag)));
 }
@@ -87,6 +126,10 @@ async function loadPublishedProjects() {
         p:p.price || "",
         d:p.developer || "Project details",
         desc:p.description || "",
+        size:p.size || "",
+        bedrooms:p.bedrooms || "",
+        completion:p.completion || "",
+        floorplan:p.floorplan || "",
         brochure:p.brochure || "",
         tags:Array.isArray(p.tags)?p.tags:[],
         photos:Array.isArray(p.photos)?p.photos:[],
@@ -95,6 +138,7 @@ async function loadPublishedProjects() {
       };
     }).sort((a,b)=>(a.order-b.order)||a.n.localeCompare(b.n));
     render();
+    const detailMatch=location.hash.match(/^#project\\/(.+)$/);if(detailMatch)openProjectDetail(decodeURIComponent(detailMatch[1]),false);
   } catch (error) {
     console.error("Could not load published projects:",error);
     $("count").textContent = "Project listings are temporarily unavailable.";
