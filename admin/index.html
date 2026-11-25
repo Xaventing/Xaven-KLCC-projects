@@ -1,118 +1,62 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Xaven Admin | Property Discovery</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xaven Admin | Property Discovery</title>
 <style>
-:root{--bg:#101010;--panel:#191919;--gold:#c7a36a;--cream:#f4efe6;--muted:#aaa49a;--line:#34312c;--red:#d97757;--green:#8bb58c}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--cream);font:14px/1.5 Arial,sans-serif}button,input{font:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:#151515;border-right:1px solid var(--line);padding:26px 18px}.logo{font-size:19px;font-weight:bold;letter-spacing:3px;margin:0 10px 5px}.logo span{color:var(--gold)}.sub{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 10px 35px}.nav{display:grid;gap:7px}.nav a{color:#c8c1b6;text-decoration:none;padding:12px;border-radius:5px}.nav a.active,.nav a:hover{background:#2b251b;color:var(--gold)}.sidefoot{position:sticky;top:90vh;margin:40px 10px 0;color:#777;font-size:11px}.main{padding:34px;max-width:1250px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold)}h1{font-size:28px;margin:5px 0}.muted{color:var(--muted)}.pill{border:1px solid #67583f;color:var(--gold);padding:6px 10px;border-radius:20px;font-size:11px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:30px;margin-top:8px}.panel{margin-top:18px}.panel h2{font-size:17px;margin:0 0 12px}.notice{border:1px solid #756143;background:#211d17;padding:16px;border-radius:7px;color:#d8c9ad;margin-top:20px}.previewbar{display:none;border:1px solid #756143;background:#282218;color:#e5d4b5;padding:11px 14px;border-radius:6px;margin-bottom:18px;font-size:12px}.previewbar strong{color:var(--gold)}.sample{color:var(--gold);font-size:10px;border:1px solid #665438;border-radius:20px;padding:4px 8px}.tablewrap{overflow-x:auto}.preview-actions{display:flex;gap:9px;flex-wrap:wrap}.notice strong{color:var(--gold)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;background:var(--gold);color:#17130d;padding:11px 16px;border-radius:4px;font-weight:bold;cursor:pointer}.btn.secondary{background:transparent;color:var(--cream);border:1px solid #62543d}.btn:disabled{opacity:.4;cursor:not-allowed}.login{max-width:430px;margin:7vh auto;background:var(--panel);border:1px solid var(--line);padding:30px;border-radius:10px}.login h1{font-size:25px}.field{display:block;margin:16px 0}.field span{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}.field input{width:100%;background:#101010;color:var(--cream);border:1px solid #49443a;padding:12px;border-radius:4px}.status{font-size:12px;color:var(--muted);margin-top:12px}.hidden{display:none!important}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:12px}th{color:var(--muted);font-weight:normal}@media(max-width:760px){.shell{grid-template-columns:1fr}.side{padding:15px;border-right:0;border-bottom:1px solid var(--line)}.sub,.sidefoot{display:none}.nav{grid-template-columns:repeat(3,1fr)}.nav a{font-size:11px;text-align:center;padding:8px}.main{padding:22px 16px}.grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:12px;flex-direction:column}}
-</style>
-</head>
-<body>
-<div id="loginView" class="login">
-  <div class="eyebrow">XAVEN PROPERTY DISCOVERY</div>
-  <h1>Admin Sign In</h1>
-  <p class="muted">Private access for the website administrator.</p>
-  <form id="loginForm">
-    <label class="field"><span>EMAIL ADDRESS</span><input id="email" type="email" autocomplete="username" required placeholder="you@example.com"></label>
-    <label class="field"><span>PASSWORD</span><input id="password" type="password" autocomplete="current-password" required placeholder="Enter your password"></label>
-    <button class="btn" type="submit" id="loginBtn" disabled>Sign in</button>
-    <div id="loginStatus" class="status">Authentication is not connected yet. Add your Firebase project configuration to activate secure login.</div>
-  </form>
-  <p class="status"><a href="../" style="color:var(--gold)">← Back to public website</a></p>
-</div>
-<div id="appView" class="shell hidden">
-  <aside class="side">
-    <div class="logo">XAVEN<span>.</span></div><div class="sub">PROPERTY ADMIN</div>
-    <nav class="nav">
-      <a class="active" href="#overview">Overview</a><a href="#projects">Projects</a><a href="#categories">Categories</a><a href="#locations">Locations</a><a href="#media">Media</a><a href="#settings">Settings</a>
-    </nav>
-    <div class="sidefoot">Xaven Property Discovery<br>Admin workspace</div>
-  </aside>
-  <main class="main">
-    <div class="previewbar" id="previewBar"><strong>PREVIEW MODE</strong> · Demo data only · Read-only · Changes are not saved <a href="./" style="float:right;color:var(--gold)">Exit preview ↗</a></div><div class="top"><div><div class="eyebrow">ADMINISTRATION</div><h1>Dashboard Overview</h1><div class="muted">Manage your property discovery website.</div></div><button class="btn secondary" id="logoutBtn">Sign out</button></div>
-    <div class="grid">
-      <div class="stat"><small>Total projects</small><strong id="projectCount">—</strong><span class="muted" id="totalHint">Connected data source required</span></div>
-      <div class="stat"><small>Published</small><strong id="publishedCount">—</strong><span class="muted" id="publishedHint">Awaiting database connection</span></div>
-      <div class="stat"><small>Drafts</small><strong id="draftCount">—</strong><span class="muted" id="draftHint">Awaiting database connection</span></div>
-    </div>
-    <div class="notice" id="setupNotice"><strong>First-time setup required</strong><br>This dashboard shell is ready. Before project editing can go live, connect Firebase Authentication, configure the administrator allow-list, and connect the Google Sheets API endpoint and Firebase Storage bucket. No project data is changed by this page yet.</div>
-    <section class="panel" id="projects"><h2>Project Management <span class="sample" id="sampleLabel" style="display:none">SAMPLE DATA</span></h2><p class="muted" id="projectIntro">Your project list will appear here after the secure Google Sheets connection is configured.</p><div class="actions"><button class="btn" disabled>Add new project</button><button class="btn secondary" disabled>Import from Sheets</button></div><div class="tablewrap" id="projectTable" style="display:none;margin-top:18px"><table><thead><tr><th>PROJECT</th><th>LOCATION</th><th>CATEGORY</th><th>STATUS</th><th>PRICE</th></tr></thead><tbody><tr><td>Divine KLCC</td><td>KLCC</td><td>Foreigner Friendly</td><td><span class="sample">Published</span></td><td>From RM740k</td></tr><tr><td>M Aurora</td><td>Old Klang Road</td><td>First Home Buyer</td><td><span class="sample">Published</span></td><td>Sample price</td></tr><tr><td>M Nova</td><td>Setapak</td><td>Investment Friendly</td><td><span class="sample">Draft</span></td><td>Sample price</td></tr><tr><td>M Aria</td><td>Sentul</td><td>Family Living</td><td><span class="sample">Published</span></td><td>Sample price</td></tr><tr><td>KLCC Residence Collection</td><td>KLCC</td><td>Renter Friendly</td><td><span class="sample">Draft</span></td><td>Sample price</td></tr></tbody></table></div></section>
-    <section class="panel" id="categories"><h2>Categories & Tags</h2><p class="muted">Foreigner Friendly · First Home Buyer · Investment Friendly · Renter Friendly</p></section>
-    <section class="panel" id="locations"><h2>Locations</h2><p class="muted">KLCC · Old Klang Road · Setapak · Sentul · Kepong · Mont Kiara · Bangsar · Cheras · Petaling Jaya</p></section>
-    <section class="panel" id="media"><h2>Project Media</h2><p class="muted">Firebase Storage upload will be enabled after the storage bucket and access rules are configured.</p></section>
-    <section class="panel" id="settings"><h2>Settings</h2><p class="muted">Signed in as <span id="signedEmail">—</span></p></section>
-  </main>
-</div>
+:root{--bg:#101010;--panel:#191919;--panel2:#211f1b;--gold:#c7a36a;--cream:#f4efe6;--muted:#aaa49a;--line:#39352e;--green:#8bb58c;--red:#d97757}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--cream);font:14px/1.5 Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{min-height:100vh;display:grid;grid-template-columns:235px minmax(0,1fr)}.side{background:#151515;border-right:1px solid var(--line);padding:25px 17px;position:sticky;top:0;height:100vh}.logo{font-size:20px;font-weight:bold;letter-spacing:3px;margin:0 10px}.logo span{color:var(--gold)}.sub,.eyebrow{font-size:10px;color:var(--gold);letter-spacing:2px}.sub{margin:3px 10px 30px;color:var(--muted)}.nav{display:grid;gap:5px}.nav a{color:#c8c1b6;text-decoration:none;padding:11px 12px;border-radius:5px}.nav a.active,.nav a:hover{background:#2b251b;color:var(--gold)}.sidefoot{position:absolute;bottom:22px;left:27px;color:#777;font-size:11px}.main{padding:30px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:25px;gap:15px}h1{font-size:27px;margin:5px 0}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.stat,.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:29px;margin-top:6px}.panel{margin-top:17px}.panel h2{font-size:17px;margin:0 0 12px}.btn{border:0;background:var(--gold);color:#17130d;padding:10px 15px;border-radius:4px;font-weight:bold}.btn.secondary{background:transparent;color:var(--cream);border:1px solid #62543d}.btn.danger{background:transparent;color:#e49a80;border:1px solid #704538}.btn.small{padding:7px 10px;font-size:11px}.actions{display:flex;gap:9px;flex-wrap:wrap}.previewbar,.notice{border:1px solid #756143;background:#211d17;color:#e5d4b5;padding:12px 14px;border-radius:6px;margin-bottom:18px;font-size:12px}.notice{margin:18px 0 0}.previewbar strong,.notice strong{color:var(--gold)}.hidden{display:none!important}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}.field label,.field>span{font-size:10px;color:var(--muted);letter-spacing:1px}.field input,.field select,.field textarea,.toolbar input,.toolbar select{width:100%;padding:11px;background:#101010;color:var(--cream);border:1px solid #49443a;border-radius:4px;min-width:0}.field textarea{min-height:90px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.full{grid-column:1/-1}.upload{border:1px dashed #756143;background:#141311;border-radius:7px;padding:23px;text-align:center;cursor:pointer;color:var(--muted)}.upload strong{display:block;color:var(--gold);margin:5px}.thumbs{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.thumb{width:112px;height:90px;position:relative;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#222}.thumb img{width:100%;height:100%;object-fit:cover}.thumb button{position:absolute;right:4px;top:4px;border:0;background:#111d;color:white;border-radius:3px}.thumb em{position:absolute;left:4px;bottom:4px;background:#111d;color:var(--gold);font-size:9px;padding:2px 4px;font-style:normal}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.check{display:flex;align-items:center;gap:8px;background:#141414;border:1px solid var(--line);border-radius:5px;padding:9px;font-size:12px}.check input{accent-color:var(--gold)}.group-title{font-size:10px;letter-spacing:1.5px;color:var(--gold);margin:14px 0 8px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:700px}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:middle}th{color:var(--muted);font-weight:normal}.cover{width:58px;height:44px;object-fit:cover;border-radius:4px;background:#292621}.tag{display:inline-block;border:1px solid #62543d;color:#d6c39f;border-radius:20px;padding:3px 7px;font-size:10px;margin:2px}.status{font-size:10px;padding:4px 7px;border-radius:20px;border:1px solid #62543d;color:var(--gold)}.status.published{color:var(--green);border-color:#45634a}.status.sold{color:#e49a80;border-color:#704538}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:6px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.helper{font-size:11px;color:var(--muted);margin-top:5px}.toast{position:fixed;right:20px;bottom:20px;background:#282218;border:1px solid #756143;padding:12px 16px;border-radius:6px;color:var(--cream);z-index:10}.loclist{columns:2}.loclist .check{break-inside:avoid}.login{max-width:420px;margin:8vh auto;background:var(--panel);border:1px solid var(--line);padding:30px;border-radius:10px}
+@media(max-width:800px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto;padding:14px}.sub,.sidefoot{display:none}.nav{grid-template-columns:repeat(3,1fr)}.nav a{text-align:center;font-size:11px;padding:8px}.main{padding:20px 14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.top{align-items:flex-start;flex-direction:column}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.loclist{columns:1}}
+</style></head><body>
+<div class="shell"><aside class="side"><div class="logo">XAVEN<span>.</span></div><div class="sub">PROPERTY ADMIN</div><nav class="nav"><a href="#overview" class="active">Overview</a><a href="#projects">Projects</a><a href="#editor">Add / Edit Project</a><a href="#locations">Locations</a><a href="#categories">Categories & Tags</a><a href="#media">Media Library</a><a href="#settings">Settings</a></nav><div class="sidefoot">Xaven Property Discovery<br>Phase One · UI Prototype</div></aside>
+<main class="main"><div class="previewbar"><strong>PHASE ONE · INTERACTIVE PROTOTYPE</strong> — Demo workspace. Records are saved in this browser only; not connected to live website or cloud database.</div>
+<div class="top"><div><div class="eyebrow">ADMINISTRATION</div><h1>Property Dashboard</h1><div class="muted">Organise your project directory from one place.</div></div><button class="btn" id="newBtn">＋ Add New Project</button></div>
+<section id="overview"><div class="grid"><div class="stat"><small>Total Projects</small><strong id="totalCount">0</strong><span class="muted">All records</span></div><div class="stat"><small>Published</small><strong id="pubCount">0</strong><span class="muted">Ready for website</span></div><div class="stat"><small>Drafts</small><strong id="draftCount">0</strong><span class="muted">Not published</span></div><div class="stat"><small>Featured</small><strong id="featureCount">0</strong><span class="muted">Priority projects</span></div></div></section>
+<section class="panel" id="projects"><div class="sectionhead"><div><h2>Project Management</h2><div class="muted">Search, edit, duplicate or update project status.</div></div><button class="btn" id="newBtn2">＋ Add Project</button></div><div class="toolbar"><input id="search" placeholder="Search project / developer..." style="flex:2;min-width:190px"><select id="filterLoc" style="flex:1"><option value="">All locations</option></select><select id="filterStatus" style="flex:1"><option value="">All statuses</option><option>Draft</option><option>Published</option><option>Sold Out</option></select></div><div class="tablewrap" id="projectRows"></div></section>
+<section class="panel" id="editor"><div class="sectionhead"><div><h2 id="formTitle">Add New Project</h2><div class="muted">Start with photos, then fill in the key project information.</div></div><span class="status">PROJECT FORM</span></div><form id="projectForm"><input type="hidden" id="editId"><div class="field"><label>01 · PROJECT PHOTOS</label><label class="upload" for="photoInput"><strong>＋ Upload Project Photos</strong>Cover photo first · Add multiple images · JPG, PNG or WebP<input id="photoInput" type="file" accept="image/*" multiple hidden></label><div class="helper">The first image is used as the project card cover. Uploads in this prototype stay in this browser only.</div><div class="thumbs" id="photoThumbs"></div></div>
+<div class="formgrid"><div class="field"><label for="name">02 · PROJECT NAME *</label><input id="name" required placeholder="e.g. M Aurora"></div><div class="field"><label for="developer">DEVELOPER</label><input id="developer" placeholder="e.g. Mah Sing"></div>
+<div class="field"><label for="location">03 · LOCATION *</label><select id="location" required><option value="">Choose a location</option></select></div><div class="field"><label for="type">PROPERTY TYPE</label><select id="type"><option value="">Select type</option><option>Condominium</option><option>Serviced Residence</option><option>Luxury Residence</option><option>Apartment</option><option>Landed</option><option>Mixed Development</option><option>Commercial</option></select></div>
+<div class="field"><label for="price">STARTING PRICE (RM)</label><input id="price" type="number" min="0" placeholder="e.g. 390000"></div><div class="field"><label for="size">UNIT SIZE / BUILT-UP</label><input id="size" placeholder="e.g. 550 – 1,200 sqft"></div>
+<div class="field"><label for="bedrooms">BEDROOM OPTIONS</label><input id="bedrooms" placeholder="e.g. 1–4 bedrooms"></div><div class="field"><label for="completion">ESTIMATED COMPLETION</label><input id="completion" placeholder="e.g. 2029"></div>
+<div class="field full"><label>04 · CATEGORIES & TAGS (SELECT ALL THAT APPLY)</label><div class="checks" id="tagChecks"></div><div class="helper">Customers can filter projects by these tags on the public website.</div></div>
+<div class="field full"><label for="description">SHORT DESCRIPTION</label><textarea id="description" placeholder="What makes this project worth exploring?"></textarea></div>
+<div class="field"><label for="brochure">BROCHURE / PROJECT WEBSITE LINK</label><input id="brochure" type="url" placeholder="https://..."></div><div class="field"><label for="floorplan">FLOOR PLAN / DRIVE LINK</label><input id="floorplan" type="url" placeholder="https://..."></div>
+<div class="field"><label for="status">PROJECT STATUS</label><select id="status"><option>Draft</option><option>Published</option><option>Sold Out</option></select></div><div class="field"><label for="order">DISPLAY ORDER (LOWER NUMBER FIRST)</label><input id="order" type="number" min="1" value="10"></div>
+<div class="field full"><label class="check"><input id="featured" type="checkbox"> Feature this project (prioritise its display on the website)</label></div></div>
+<div class="actions"><button class="btn" type="submit" id="saveBtn">Save Project</button><button class="btn secondary" type="button" id="savePublish">Save & Publish</button><button class="btn secondary" type="button" id="resetBtn">Clear Form</button></div></form></section>
+<section class="panel" id="locations"><h2>Fixed Location Options</h2><div class="muted">These options are shared by the project form and location filters.</div><div id="locationDisplay"></div></section>
+<section class="panel" id="categories"><h2>Fixed Categories & Tags</h2><div class="muted">Select multiple tags for each project.</div><div id="tagDisplay" style="margin-top:12px"></div></section>
+<section class="panel" id="media"><h2>Media Library</h2><div class="muted">Images attached to your locally saved prototype projects.</div><div id="mediaDisplay" class="thumbs"></div></section>
+<section class="panel" id="settings"><h2>Prototype Settings & Next Phase</h2><p class="muted">Phase One currently stores project records in this browser's local storage. It does not upload images to Firebase Storage, sync Google Sheets, or publish changes to the public website. Phase Two will connect secure login, cloud image storage and a shared database.</p><div class="actions"><button class="btn secondary" id="exportBtn">Export Project Data (JSON)</button><button class="btn danger" id="resetDemo">Restore Demo Data</button></div></section>
+<div class="helper" style="padding:25px 0">XAVEN PROPERTY DISCOVERY · ADMIN PROTOTYPE</div></main></div><div id="toast" class="toast hidden"></div>
 <script>
-(function(){
-  var preview = new URLSearchParams(window.location.search).get("preview") === "1";
-  if (!preview) return;
-  document.getElementById("loginView").classList.add("hidden");
-  document.getElementById("appView").classList.remove("hidden");
-  document.getElementById("previewBar").style.display = "block";
-  document.getElementById("logoutBtn").classList.add("hidden");
-  document.getElementById("setupNotice").classList.add("hidden");
-  document.getElementById("projectCount").textContent = "5";
-  document.getElementById("publishedCount").textContent = "3";
-  document.getElementById("draftCount").textContent = "2";
-  document.getElementById("totalHint").textContent = "Demo projects";
-  document.getElementById("publishedHint").textContent = "Sample listing status";
-  document.getElementById("draftHint").textContent = "Sample drafts";
-  document.getElementById("projectIntro").textContent = "Example project records shown for layout preview. This is not connected to your live listings.";
-  document.getElementById("projectTable").style.display = "block";
-  document.getElementById("sampleLabel").style.display = "inline-block";
-  document.getElementById("signedEmail").textContent = "Preview session (not signed in)";
-})();
-</script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-const firebaseConfig = {
-  apiKey: "REPLACE_WITH_FIREBASE_API_KEY",
-  authDomain: "REPLACE_WITH_FIREBASE_AUTH_DOMAIN",
-  projectId: "REPLACE_WITH_FIREBASE_PROJECT_ID",
-  storageBucket: "REPLACE_WITH_FIREBASE_STORAGE_BUCKET",
-  messagingSenderId: "REPLACE_WITH_FIREBASE_MESSAGING_SENDER_ID",
-  appId: "REPLACE_WITH_FIREBASE_APP_ID"
-};
-const configured = Object.values(firebaseConfig).every(v => v && !v.startsWith("REPLACE_"));
-const previewMode = new URLSearchParams(location.search).get("preview") === "1";
-const loginStatus=document.getElementById("loginStatus"), loginBtn=document.getElementById("loginBtn");
-if(previewMode){
-  document.getElementById("loginView").classList.add("hidden");
-  document.getElementById("appView").classList.remove("hidden");
-  document.getElementById("previewBar").style.display="block";
-  document.getElementById("logoutBtn").classList.add("hidden");
-  document.getElementById("setupNotice").classList.add("hidden");
-  document.getElementById("projectCount").textContent="5";
-  document.getElementById("publishedCount").textContent="3";
-  document.getElementById("draftCount").textContent="2";
-  document.getElementById("totalHint").textContent="Demo projects";
-  document.getElementById("publishedHint").textContent="Sample listing status";
-  document.getElementById("draftHint").textContent="Sample drafts";
-  document.getElementById("projectIntro").textContent="Example project records shown for layout preview. This is not connected to your live listings.";
-  document.getElementById("projectTable").style.display="block";
-  document.getElementById("sampleLabel").style.display="inline-block";
-  document.getElementById("signedEmail").textContent="Preview session (not signed in)";
-}
-if(configured){
-  try{
-    const app=initializeApp(firebaseConfig), auth=getAuth(app);
-    loginBtn.disabled=false;
-    onAuthStateChanged(auth,user=>{
-      document.getElementById("loginView").classList.toggle("hidden",!!user);
-      document.getElementById("appView").classList.toggle("hidden",!user);
-      if(user) document.getElementById("signedEmail").textContent=user.email||"Admin";
-    });
-    document.getElementById("loginForm").addEventListener("submit",async e=>{
-      e.preventDefault();loginBtn.disabled=true;loginStatus.textContent="Signing in…";
-      try{await signInWithEmailAndPassword(auth,document.getElementById("email").value,document.getElementById("password").value);loginStatus.textContent="Signed in."}
-      catch(err){loginStatus.textContent=err.message;loginBtn.disabled=false}
-    });
-    document.getElementById("logoutBtn").addEventListener("click",()=>signOut(auth));
-  }catch(err){loginStatus.textContent="Firebase setup error: "+err.message}
-}
-</script>
-</body></html>
+const LOCATIONS={"KL CITY CENTRE":["KLCC","TRX","Bukit Bintang","KL Sentral","KL City Centre"],"NORTH KL":["Mont Kiara","Dutamas","Desa ParkCity","Kepong","Sentul","Setapak","Wangsa Maju"],"SOUTH KL":["Old Klang Road","Kuchai Lama","Sri Petaling","OUG","Taman Desa","Cheras"],"CENTRAL & WEST KL":["Bangsar","Bangsar South","Mid Valley","Seputeh","Ampang"],"SELANGOR / KLANG VALLEY":["Petaling Jaya","Damansara","Subang Jaya","Puchong","Shah Alam","Klang"]};
+const TAGS=["Foreigner Friendly","First Home Buyer","Investment Friendly","Renter Friendly","Family Living","Near MRT / LRT","Luxury Living"];
+const KEY="xaven_admin_phase1_projects";
+const demo=[{id:"d1",name:"Divine KLCC",developer:"",location:"KLCC",type:"Luxury Residence",price:"740000",size:"540 – 982 sqft",bedrooms:"1–3 bedrooms",completion:"",tags:["Foreigner Friendly","Investment Friendly","Luxury Living"],description:"Curated KLCC residence showcase.",brochure:"",floorplan:"",status:"Published",order:1,featured:true,photos:[]},{id:"d2",name:"M Aurora",developer:"Mah Sing",location:"Old Klang Road",type:"Condominium",price:"",size:"",bedrooms:"",completion:"",tags:["First Home Buyer","Investment Friendly","Renter Friendly","Family Living"],description:"Residential project along Old Klang Road.",brochure:"",floorplan:"",status:"Published",order:2,featured:false,photos:[]},{id:"d3",name:"M Nova",developer:"Mah Sing",location:"Setapak",type:"Condominium",price:"390000",size:"",bedrooms:"",completion:"",tags:["First Home Buyer","Investment Friendly","Renter Friendly","Near MRT / LRT"],description:"Condominium project in Setapak.",brochure:"",floorplan:"",status:"Draft",order:3,featured:false,photos:[]},{id:"d4",name:"M Aria",developer:"Mah Sing",location:"Sentul",type:"Condominium",price:"",size:"",bedrooms:"",completion:"",tags:["First Home Buyer","Investment Friendly","Family Living"],description:"Residential project in Sentul.",brochure:"",floorplan:"",status:"Published",order:4,featured:false,photos:[]},{id:"d5",name:"KLCC Residence Collection",developer:"Various",location:"KLCC",type:"Serviced Residence",price:"",size:"",bedrooms:"",completion:"",tags:["Foreigner Friendly","Investment Friendly","Renter Friendly","Luxury Living"],description:"Curated collection of KLCC residences.",brochure:"",floorplan:"",status:"Draft",order:5,featured:false,photos:[]}];
+let projects=load(),photos=[];
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY));return Array.isArray(v)?v:structuredClone(demo)}catch(e){return structuredClone(demo)}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(projects));return true}catch(e){toast("Browser storage is full. Remove some large photos and try again.");return false}}
+function $(id){return document.getElementById(id)}
+function toast(s){const t=$("toast");t.textContent=s;t.classList.remove("hidden");setTimeout(()=>t.classList.add("hidden"),2600)}
+function allLocations(){return Object.values(LOCATIONS).flat()}
+function initOptions(){for(const [g,items] of Object.entries(LOCATIONS)){const og=document.createElement("optgroup");og.label=g;items.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;og.append(o)});$("location").append(og)}allLocations().forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;$("filterLoc").append(o)});$("tagChecks").innerHTML=TAGS.map(t=>'<label class="check"><input type="checkbox" value="'+t+'"> '+t+'</label>').join("");$("locationDisplay").innerHTML=Object.entries(LOCATIONS).map(([g,a])=>'<div class="group-title">'+g+'</div><div class="checks">'+a.map(x=>'<div class="check">'+x+'</div>').join("")+'</div>').join("");$("tagDisplay").innerHTML=TAGS.map(t=>'<span class="tag">'+t+'</span>').join("")}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){const q=$("search").value.toLowerCase(),loc=$("filterLoc").value,st=$("filterStatus").value;const rows=projects.filter(p=>(!q||(p.name+" "+p.developer).toLowerCase().includes(q))&&(!loc||p.location===loc)&&(!st||p.status===st)).sort((a,b)=>(a.order||99)-(b.order||99));$("totalCount").textContent=projects.length;$("pubCount").textContent=projects.filter(p=>p.status==="Published").length;$("draftCount").textContent=projects.filter(p=>p.status==="Draft").length;$("featureCount").textContent=projects.filter(p=>p.featured).length;
+$("projectRows").innerHTML=rows.length?'<table><thead><tr><th>PHOTO</th><th>PROJECT</th><th>LOCATION</th><th>TAGS</th><th>STATUS</th><th>PRICE</th><th>ACTIONS</th></tr></thead><tbody>'+rows.map(p=>'<tr><td>'+(p.photos?.[0]?'<img class="cover" src="'+p.photos[0]+'">':'<div class="cover"></div>')+'</td><td><strong>'+escapeHtml(p.name)+'</strong><div class="muted">'+escapeHtml(p.developer)+'</div>'+(p.featured?'<span class="tag">Featured</span>':'')+'</td><td>'+escapeHtml(p.location)+'</td><td>'+p.tags.slice(0,2).map(t=>'<span class="tag">'+escapeHtml(t)+'</span>').join("")+(p.tags.length>2?' +'+(p.tags.length-2):'')+'</td><td><span class="status '+(p.status==="Published"?"published":p.status==="Sold Out"?"sold":"")+'">'+p.status+'</span></td><td>'+(p.price?'RM '+Number(p.price).toLocaleString("en-MY"):'—')+'</td><td><div class="actions"><button class="btn secondary small" onclick="editProject(\''+p.id+'\')">Edit</button><button class="btn secondary small" onclick="duplicateProject(\''+p.id+'\')">Copy</button><button class="btn danger small" onclick="deleteProject(\''+p.id+'\')">Delete</button></div></td></tr>').join("")+'</tbody></table>':'<div class="empty">No projects found. Add your first project above.</div>';
+const media=projects.flatMap(p=>(p.photos||[]).map((src,i)=>({src,name:p.name,i})));$("mediaDisplay").innerHTML=media.length?media.map(m=>'<div class="thumb"><img src="'+m.src+'"><em>'+escapeHtml(m.name)+'</em></div>').join(""):'<div class="muted">No project photos uploaded yet.</div>'}
+function resetForm(){ $("projectForm").reset();$("editId").value="";$("formTitle").textContent="Add New Project";$("saveBtn").textContent="Save Project";$("order").value="10";photos=[];renderPhotos();document.querySelectorAll("#tagChecks input").forEach(x=>x.checked=false)}
+function renderPhotos(){$("photoThumbs").innerHTML=photos.map((src,i)=>'<div class="thumb"><img src="'+src+'">'+(i===0?'<em>COVER</em>':'')+'<button type="button" onclick="removePhoto('+i+')">×</button></div>').join("")}
+window.removePhoto=i=>{photos.splice(i,1);renderPhotos()};
+$("photoInput").addEventListener("change",async e=>{const files=[...e.target.files];for(const f of files){if(!f.type.startsWith("image/"))continue;const data=await new Promise(resolve=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.readAsDataURL(f)});photos.push(data)}renderPhotos();e.target.value=""});
+function formData(){return {id:$("editId").value||"p"+Date.now(),name:$("name").value.trim(),developer:$("developer").value.trim(),location:$("location").value,type:$("type").value,price:$("price").value,size:$("size").value.trim(),bedrooms:$("bedrooms").value.trim(),completion:$("completion").value.trim(),tags:[...document.querySelectorAll("#tagChecks input:checked")].map(x=>x.value),description:$("description").value.trim(),brochure:$("brochure").value.trim(),floorplan:$("floorplan").value.trim(),status:$("status").value,order:Number($("order").value)||99,featured:$("featured").checked,photos}}
+$("projectForm").addEventListener("submit",e=>{e.preventDefault();saveProject()});
+function saveProject(forcePublish=false){const p=formData();if(!p.name||!p.location){toast("Please enter a project name and choose a location.");return}if(forcePublish)p.status="Published";const idx=projects.findIndex(x=>x.id===p.id);if(idx>=0)projects[idx]=p;else projects.push(p);if(persist()){render();resetForm();toast("Project saved in this browser prototype.");location.hash="projects"}}
+$("savePublish").addEventListener("click",()=>saveProject(true));
+window.editProject=id=>{const p=projects.find(x=>x.id===id);if(!p)return;$("editId").value=p.id;["name","developer","location","type","price","size","bedrooms","completion","description","brochure","floorplan","status","order"].forEach(k=>$(k).value=p[k]??"");$("featured").checked=!!p.featured;photos=[...(p.photos||[])];document.querySelectorAll("#tagChecks input").forEach(x=>x.checked=p.tags.includes(x.value));$("formTitle").textContent="Edit Project · "+p.name;$("saveBtn").textContent="Update Project";renderPhotos();location.hash="editor"};
+window.deleteProject=id=>{const p=projects.find(x=>x.id===id);if(p&&confirm('Delete "'+p.name+'"?')){projects=projects.filter(x=>x.id!==id);persist();render();toast("Project deleted from this browser.")}};
+window.duplicateProject=id=>{const p=projects.find(x=>x.id===id);if(!p)return;const c={...p,id:"p"+Date.now(),name:p.name+" (Copy)",status:"Draft",order:(p.order||10)+1,photos:[...(p.photos||[])]};projects.push(c);persist();render();toast("Draft copy created.")};
+$("newBtn").onclick=$("newBtn2").onclick=()=>{resetForm();location.hash="editor"};
+$("resetBtn").onclick=resetForm;
+["search","filterLoc","filterStatus"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
+$("exportBtn").onclick=()=>{const blob=new Blob([JSON.stringify(projects,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="xaven-projects-phase1.json";a.click();URL.revokeObjectURL(url)};
+$("resetDemo").onclick=()=>{if(confirm("Replace this browser's project list with the sample projects?")){projects=structuredClone(demo);persist();render();resetForm();toast("Sample projects restored.")}};
+initOptions();render();resetForm();
+</script></body></html>
