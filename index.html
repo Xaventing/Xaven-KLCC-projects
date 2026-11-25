@@ -366,11 +366,31 @@ input,select{border-radius:8px;background:#11110f}
   .heroGrid .portrait img{transform:scale(1.05)}
 }
 
+
+/* Compact one-row category selector */
+#categories .head{margin-bottom:22px}
+#categories .head h2{margin-top:5px}
+#categories .head p{display:none}
+#categories .cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#categories .cat{min-height:0;padding:17px 15px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:7px;background:linear-gradient(145deg,#191916,#111110)}
+#categories .cat small,#categories .cat p{display:none}
+#categories .cat h3{margin:0;font-size:clamp(12px,1.15vw,15px);line-height:1.25;font-weight:500;white-space:normal}
+@media(max-width:720px){
+ #categories .cats{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;padding:2px 1px 9px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ #categories .cats::-webkit-scrollbar{display:none}
+ #categories .cat{flex:0 0 auto;min-width:124px;min-height:46px;padding:11px 13px}
+ #categories .cat h3{font-size:11px;white-space:nowrap}
+}
+
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero"><div class="wrap heroGrid"><div class="portrait" style="padding:0;overflow:hidden"><img src="xaven-profile.jpg" alt="Xaven Ting" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div><div class="heroIntro"><div class="eyebrow">KUALA LUMPUR · KLCC · KLANG VALLEY</div><div class="heroGreeting">Hi, I'm</div><h1><span class="gold">Xaven Ting.</span></h1><p class="heroLead">Find a property that fits your next move.</p><p class="heroDescription">Property consultant focused on new residential projects in KLCC and surrounding Klang Valley. Explore selected opportunities and make more informed property decisions.</p><a class="btn" href="#projects">EXPLORE PROJECTS</a><a class="btn alt" href="https://wa.me/60182057030">WHATSAPP XAVEN</a></div></div></section>
-<section id="categories"><div class="wrap"><div class="head"><div class="eyebrow">DISCOVER BY PURPOSE</div><h2>What are you looking for?</h2><p>Select a category to explore matching projects.</p></div><div class="cats">
-<div class="cat active" data-tag="Foreigner Friendly"><small>01 / PRIORITY</small><h3>Foreigner Friendly</h3><p>Explore projects for eligible foreign buyers.</p></div><div class="cat" data-tag="First Home Buyer"><small>02</small><h3>First Home Buyer</h3><p>Options for your first property purchase.</p></div><div class="cat" data-tag="Investment Friendly"><small>03</small><h3>Investment Friendly</h3><p>Explore property investment opportunities.</p></div><div class="cat" data-tag="Renter Friendly"><small>04</small><h3>Renter Friendly</h3><p>Consider rental demand and connectivity.</p></div></div>
+<section id="categories"><div class="wrap"><div class="head"><div class="eyebrow">DISCOVER BY PURPOSE</div><h2>What are you looking for?</h2></div><div class="cats">
+<div class="cat active" data-tag="Foreigner Friendly"><h3>Foreigner Friendly</h3></div>
+<div class="cat" data-tag="First Home Buyer"><h3>First Home Buyer</h3></div>
+<div class="cat" data-tag="Investment Friendly"><h3>Investment Friendly</h3></div>
+<div class="cat" data-tag="Renter Friendly"><h3>Renter Friendly</h3></div>
+</div>
 <div class="head" style="margin-top:40px"><div class="eyebrow">PROJECT DIRECTORY</div><h2 id="projects">Explore Projects</h2><p id="count">Sample project listings</p></div>
 <div class="filters"><div><label>SEARCH PROJECT</label><input id="q" placeholder="Search project or developer"></div><div><label>LOCATION</label><select id="area"><option value="">All locations</option><option>KLCC</option><option>Old Klang Road</option><option>Setapak</option><option>Sentul</option><option>Kepong</option></select></div><div><label>PROPERTY TYPE</label><select id="type"><option value="">All types</option><option>Condominium</option><option>Serviced Residence</option><option>Luxury Residence</option></select></div></div>
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
