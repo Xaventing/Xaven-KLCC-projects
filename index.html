@@ -106,6 +106,11 @@ input,select{border-radius:8px;background:#11110f}
 .cardName{font-size:clamp(16px,1.7vw,21px);font-weight:500;line-height:1.25;letter-spacing:-.02em;margin:0 0 5px}
 .cardStarting{font-size:12px;letter-spacing:.2px;color:#f0e5d2;opacity:.92}
 .cardStarting strong{font-weight:600;color:#e6c995}
+.cardOverlay{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.cardPrimaryInfo{min-width:0;max-width:62%}
+.cardUSP{flex:0 1 40%;max-width:40%;margin-bottom:1px;padding:7px 9px;border:1px solid #d0ad72a8;border-radius:6px;background:linear-gradient(135deg,#241e14ef,#11100eef);color:#e8d2aa;font-size:9px;line-height:1.35;letter-spacing:1px;text-align:center;text-transform:uppercase;box-shadow:0 3px 12px #0006}
+@media(max-width:720px){.cardOverlay{gap:6px}.cardPrimaryInfo{max-width:60%}.cardUSP{max-width:40%;font-size:8px;padding:6px 7px;letter-spacing:.6px}}
+
 .card .body{display:none}
 .card.expanded{aspect-ratio:auto;min-height:0;overflow:hidden}
 .card.expanded .photo{position:relative;inset:auto;aspect-ratio:4/3}
@@ -695,7 +700,7 @@ function render() {
   $("count").textContent = rows.length + " published projects";
   $("cards").innerHTML = rows.length ? rows.map(x =>
     '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy">':'<div style="position:absolute;inset:0;background:linear-gradient(135deg,#554b3b,#191919)"></div>')+
-    '<div class="cardOverlay"><div class="cardArea">'+esc(x.a||"Kuala Lumpur")+'</div><h3 class="cardName">'+esc(x.n)+'</h3><div class="cardStarting">Starting from <strong>'+priceLabel(x.p).replace(/^From /,"")+'</strong></div></div></div>'+
+    '<div class="cardOverlay"><div class="cardPrimaryInfo"><div class="cardArea">'+esc(x.a||"Kuala Lumpur")+'</div><h3 class="cardName">'+esc(x.n)+'</h3><div class="cardStarting">Starting from <strong>'+priceLabel(x.p).replace(/^From /,"")+'</strong></div></div>'+(x.usp?'<div class="cardUSP">'+esc(x.usp)+'</div>':'')+'</div></div>'+
     '<div class="body"><div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
     '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div></div></article>'
   ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
@@ -761,6 +766,7 @@ async function loadPublishedProjects() {
         a:p.location || "",
         t:p.type || "Property",
         p:p.price || "",
+        usp:p.usp || "",
         d:p.developer || "Project details",
         desc:p.description || "",
         size:p.size || "",
