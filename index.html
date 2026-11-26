@@ -885,13 +885,53 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
  const audio=document.getElementById("backgroundMusic");
  const button=document.getElementById("musicToggle");
  if(!audio||!button)return;
+ const preferenceKey="xavenBackgroundMusicPreference";
+ const getPreference=()=>{try{return localStorage.getItem(preferenceKey)||"auto";}catch(e){return "auto";}};
+ const setPreference=value=>{try{localStorage.setItem(preferenceKey,value);}catch(e){}};
  audio.volume=0.15;
- const update=()=>{const playing=!audio.paused;button.setAttribute("aria-pressed",String(playing));button.setAttribute("aria-label",playing?"Pause background music":"Play background music");button.title=playing?"Pause music":"Play music";};
- const attempt=()=>audio.play().then(update).catch(update);
- button.addEventListener("click",()=>{if(audio.paused)attempt();else{audio.pause();update();}});
- audio.addEventListener("play",update);audio.addEventListener("pause",update);
- attempt();
- document.addEventListener("visibilitychange",()=>{if(!document.hidden&&audio.paused)attempt();});
+ const update=()=>{
+  const playing=!audio.paused;
+  button.setAttribute("aria-pressed",String(playing));
+  button.setAttribute("aria-label",playing?"Pause background music":"Play background music");
+  button.title=playing?"Pause music":"Play music";
+ };
+ let started=false;
+ const removeGestureListeners=()=>{
+  ["pointerdown","touchstart","keydown","click"].forEach(type=>document.removeEventListener(type,onFirstGesture,true));
+ };
+ const onFirstGesture=()=>{
+  if(started||getPreference()==="paused")return;
+  tryStart();
+ };
+ const tryStart=()=>{
+  if(started||getPreference()==="paused")return;
+  audio.play().then(()=>{
+   started=true;
+   setPreference("playing");
+   update();
+   removeGestureListeners();
+  }).catch(update);
+ };
+ button.addEventListener("click",()=>{
+  if(audio.paused){
+   setPreference("playing");
+   tryStart();
+  }else{
+   audio.pause();
+   setPreference("paused");
+   update();
+  }
+ });
+ audio.addEventListener("play",update);
+ audio.addEventListener("pause",update);
+ if(getPreference()!=="paused"){
+  tryStart();
+  ["pointerdown","touchstart","keydown","click"].forEach(type=>document.addEventListener(type,onFirstGesture,{capture:true,passive:true}));
+ }
+ document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden&&audio.paused&&getPreference()==="playing")tryStart();
+ });
+ update();
 })();
 </script>
 <script type="module">
