@@ -766,6 +766,32 @@ html.forceMobile .detailHeroImage{width:100%;aspect-ratio:16/10;min-height:0}
 html.forceMobile .detailContentGrid{grid-template-columns:1fr;gap:0}
 html.forceMobile .detailEnquiry{position:static;padding:12px 0 0}
 html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* Project directory: compact 3-column grid with vertical progressive loading */
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:stretch}
+.projectsLoadMoreWrap{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 0 4px}
+.projectsLoadMore{padding:12px 22px;border:1px solid #806744;border-radius:6px;background:linear-gradient(135deg,#211b12,#141310);color:#e4c895;font-size:10px;font-weight:700;letter-spacing:1.3px;cursor:pointer}
+.projectsLoadMore span{padding-left:8px;font-size:14px}
+.projectsLoadMoreWrap small{font-size:10px;color:#92897b}
+@media(max-width:720px){
+ html.forceMobile .cards,.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ html.forceMobile .card,.card{min-width:0;width:100%;aspect-ratio:4/5;border-radius:7px}
+ html.forceMobile .card .photo,.card .photo{height:100%;min-height:0;padding:6px}
+ .cardOverlay{left:7px;right:7px;bottom:7px;gap:3px}
+ .cardPrimaryInfo{max-width:100%}
+ .cardArea{font-size:6px;letter-spacing:.6px;line-height:1.25}
+ .cardName{font-size:clamp(9px,2.7vw,12px);line-height:1.15;margin:3px 0}
+ .cardStarting{font-size:7px;line-height:1.2}
+ .cardStarting strong{font-size:7px}
+ .cardUSP{display:none}
+ .card.expanded{aspect-ratio:auto}
+ .card.expanded .photo{aspect-ratio:4/5}
+}
+@media(max-width:380px){
+ html.forceMobile .cards,.cards{gap:5px}
+ .cardName{font-size:9px}
+ .cardStarting,.cardStarting strong{font-size:6.5px}
+}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
@@ -846,19 +872,22 @@ function priceLabel(value) {
   const n = Number(String(value).replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? "From RM " + n.toLocaleString("en-MY") : esc(value);
 }
+let projectsShown=12;
 function render() {
   const area = $("area").value;
   const rows = data.filter(x =>
     (!area || x.a === area) &&
     (!chosen.size || x.tags.some(v => chosen.has(v)))
   );
+  const visibleRows=rows.slice(0,projectsShown);
   $("count").textContent = rows.length + " published projects";
-  $("cards").innerHTML = rows.length ? rows.map(x =>
+  $("cards").innerHTML = rows.length ? visibleRows.map(x =>
     '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy">':'<div style="position:absolute;inset:0;background:linear-gradient(135deg,#554b3b,#191919)"></div>')+
     '<div class="cardOverlay"><div class="cardPrimaryInfo"><div class="cardArea">'+esc(x.a||"Kuala Lumpur")+'</div><h3 class="cardName">'+esc(x.n)+'</h3><div class="cardStarting">Starting from <strong>'+priceLabel(x.p).replace(/^From /,"")+'</strong></div></div>'+(x.usp?'<div class="cardUSP">'+esc(x.usp)+'</div>':'')+'</div></div>'+
     '<div class="body"><div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
     '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div></div></article>'
-  ).join('') : '<div style="grid-column:1/-1;padding:35px;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
+  ).join('') : '<div style="grid-column:1/-1;padding:35px 0;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
+  if(rows.length>projectsShown){$("cards").insertAdjacentHTML("afterend",'<div class="projectsLoadMoreWrap"><button type="button" id="projectsLoadMore" class="projectsLoadMore">LOAD MORE PROJECTS <span>↓</span></button><small>Showing '+visibleRows.length+' of '+rows.length+' projects</small></div>');$("projectsLoadMore").addEventListener("click",()=>{projectsShown+=12;render();});}
 }
 let activeGalleryProject=null,activeGalleryIndex=0;
 function openProjectDetail(id,updateHash=true){
