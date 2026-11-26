@@ -792,6 +792,27 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
  .cardName{font-size:9px}
  .cardStarting,.cardStarting strong{font-size:6.5px}
 }
+
+/* Compact project preview modal; full details open only after explicit action */
+.projectPreviewBackdrop{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;padding:18px;background:#000c;backdrop-filter:blur(8px)}
+.projectPreviewBackdrop.visible{display:flex}
+.projectPreviewModal{position:relative;width:min(100%,520px);max-height:min(88vh,760px);overflow:auto;border:1px solid #665338;border-radius:13px;background:#11110f;box-shadow:0 28px 90px #000b}
+.previewClose{position:absolute;z-index:3;top:10px;right:10px;width:36px;height:36px;border:1px solid #d0ad7277;border-radius:50%;background:#090908d9;color:#f5f0e7;font-size:24px;cursor:pointer}
+.previewImage{width:100%;height:clamp(170px,34vh,260px);background:#090908;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.previewImage img{width:100%;height:100%;object-fit:contain}
+.previewNoImage{color:#d0ad72;font-size:10px;letter-spacing:3px}
+.previewBody{padding:22px 24px 24px}
+.previewBody h2{font:500 clamp(26px,5vw,36px)/1.1 Georgia,serif;color:#f5f0e7;margin:10px 0 16px}
+.previewPrice{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #393329;border-bottom:1px solid #393329}
+.previewPrice small{font-size:9px;letter-spacing:1.5px;color:#a8a196}
+.previewPrice strong{font-size:17px;font-weight:500;color:#e5c48e}
+.previewUSP{display:inline-block;margin-top:13px;padding:7px 10px;border:1px solid #806744;border-radius:5px;color:#e8d2aa;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.previewDescription{margin:14px 0 18px;color:#bcb5aa;font-size:13px;line-height:1.75;white-space:pre-line}
+.previewActions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.previewView,.previewWhatsApp{display:flex;align-items:center;justify-content:center;min-height:44px;padding:11px 10px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.8px;text-align:center;cursor:pointer}
+.previewView{border:1px solid #c4a16a;background:linear-gradient(135deg,#dfc18f,#b58b50);color:#17130d}
+.previewWhatsApp{border:1px solid #62543d;color:#e8d2aa}
+@media(max-width:520px){.projectPreviewBackdrop{padding:13px}.projectPreviewModal{width:100%;max-height:86vh;border-radius:10px}.previewImage{height:clamp(155px,29vh,215px)}.previewBody{padding:18px 17px 19px}.previewActions{grid-template-columns:1fr}.previewView,.previewWhatsApp{min-height:42px}}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
@@ -835,6 +856,7 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
   <div id="detailContent"></div>
  </div>
 </div>
+<div class="projectPreviewBackdrop" id="projectPreview" aria-hidden="true"><div class="projectPreviewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle"><button type="button" class="previewClose" id="previewClose" aria-label="Close">×</button><div id="previewContent"></div></div></div>
 <footer><div class="wrap">© 2026 XAVEN TING · PROPERTY DISCOVERY · Project prices and foreign-buyer eligibility are subject to verification.</div></footer>
 <script>
 /* Detect a physically narrow phone even if the browser is in "Desktop site" mode. */
@@ -889,6 +911,25 @@ function render() {
   ).join('') : '<div style="grid-column:1/-1;padding:35px 0;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
   if(rows.length>projectsShown){$("cards").insertAdjacentHTML("afterend",'<div class="projectsLoadMoreWrap"><button type="button" id="projectsLoadMore" class="projectsLoadMore">LOAD MORE PROJECTS <span>↓</span></button><small>Showing '+visibleRows.length+' of '+rows.length+' projects</small></div>');$("projectsLoadMore").addEventListener("click",()=>{projectsShown+=12;render();});}
 }
+function openProjectPreview(id){
+ const p=data.find(item=>item.id===id);if(!p)return;
+ const photo=p.photos?.[0];
+ const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more details?");
+ $("previewContent").innerHTML=
+  (photo?'<div class="previewImage"><img src="'+esc(photo)+'" alt="'+esc(p.n)+'"></div>':'<div class="previewImage previewNoImage">XAVEN PROPERTY DISCOVERY</div>')+
+  '<div class="previewBody"><div class="eyebrow">'+esc((p.a||"KUALA LUMPUR").toUpperCase())+' · '+esc((p.t||"PROPERTY").toUpperCase())+'</div><h2 id="previewTitle">'+esc(p.n)+'</h2>'+
+  '<div class="previewPrice"><small>STARTING FROM</small><strong>'+priceLabel(p.p)+'</strong></div>'+
+  (p.usp?'<div class="previewUSP">'+esc(p.usp)+'</div>':'')+
+  '<p class="previewDescription">'+esc(p.desc||"Discover more about this development, including its features, layouts and availability.")+'</p>'+
+  '<div class="previewActions"><button type="button" class="previewView" id="previewViewProject">VIEW PROJECT DETAILS ↗</button><a class="previewWhatsApp" href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN</a></div></div>';
+ $("projectPreview").classList.add("visible");$("projectPreview").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+ $("previewClose").onclick=closeProjectPreview;
+ $("projectPreview").onclick=e=>{if(e.target.id==="projectPreview")closeProjectPreview();};
+ $("previewViewProject").onclick=()=>{closeProjectPreview();openProjectDetail(id);};
+}
+function closeProjectPreview(){
+ $("projectPreview").classList.remove("visible");$("projectPreview").setAttribute("aria-hidden","true");document.body.style.overflow="";
+}
 let activeGalleryProject=null,activeGalleryIndex=0;
 function openProjectDetail(id,updateHash=true){
  const p=data.find(item=>item.id===id);if(!p)return;
@@ -929,13 +970,12 @@ $("cards").addEventListener("click",e=>{
  const card=e.target.closest("[data-project-id]");if(!card)return;
  const action=e.target.closest("[data-action]");
  if(action?.dataset.action==="view"){e.stopPropagation();openProjectDetail(card.dataset.projectId);return;}
- if(action?.dataset.action==="expand"){e.stopPropagation();const expanded=card.classList.toggle("expanded");action.textContent=expanded?"SHOW LESS −":"LEARN MORE +";return;}
- if(!card.classList.contains("expanded")){card.classList.add("expanded");const btn=card.querySelector('[data-action="expand"]');if(btn)btn.textContent="SHOW LESS −";}
- else {card.classList.remove("expanded");const btn=card.querySelector('[data-action="expand"]');if(btn)btn.textContent="LEARN MORE +";}
+ if(action?.dataset.action==="expand"){e.stopPropagation();openProjectPreview(card.dataset.projectId);return;}
+ openProjectPreview(card.dataset.projectId);
 });
 $("detailBack").addEventListener("click",()=>closeProjectDetail());
 $("projectDetail").addEventListener("click",e=>{if(e.target.id==="projectDetail")closeProjectDetail();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("photoLightbox")?.classList.contains("visible")){$("photoLightbox").classList.remove("visible");$("photoLightbox").setAttribute("aria-hidden","true");return;}if(e.key==="ArrowLeft"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxPrev")?.click();return;}if(e.key==="ArrowRight"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxNext")?.click();return;}if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("photoLightbox")?.classList.contains("visible")){$("photoLightbox").classList.remove("visible");$("photoLightbox").setAttribute("aria-hidden","true");return;}if(e.key==="ArrowLeft"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxPrev")?.click();return;}if(e.key==="ArrowRight"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxNext")?.click();return;}if(e.key==="Escape"&&$("projectPreview")?.classList.contains("visible")){closeProjectPreview();return;}if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
 window.addEventListener("popstate",()=>{const match=location.hash.match(/^#project\/(.+)$/);if(match)openProjectDetail(decodeURIComponent(match[1]),false);else closeProjectDetail(false);});
 function syncTags() {
   document.querySelectorAll("[data-tag]").forEach(e => e.classList.toggle("active", chosen.has(e.dataset.tag)));
