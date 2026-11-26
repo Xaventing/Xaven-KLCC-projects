@@ -794,9 +794,10 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* Compact project preview modal; full details open only after explicit action */
-.projectPreviewBackdrop{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;padding:18px;background:#000c;backdrop-filter:blur(8px)}
-.projectPreviewBackdrop.visible{display:flex}
-.projectPreviewModal{position:relative;width:min(100%,520px);max-height:min(88vh,760px);overflow:auto;border:1px solid #665338;border-radius:13px;background:#11110f;box-shadow:0 28px 90px #000b}
+.projectPreviewBackdrop{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease,visibility 0s linear .28s}
+.projectPreviewBackdrop.visible{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .28s ease,visibility 0s}
+.projectPreviewModal{position:relative;width:min( min(92vw,440px),440px);max-height:78vh;overflow:auto;border:1px solid #806744;border-radius:14px;background:#11110f;box-shadow:0 24px 70px #0009;opacity:0;transform:translateY(22px) scale(.94);transition:transform .36s cubic-bezier(.2,.8,.2,1),opacity .28s ease}
+.projectPreviewBackdrop.visible .projectPreviewModal{opacity:1;transform:translateY(0) scale(1)}
 .previewClose{position:absolute;z-index:3;top:10px;right:10px;width:36px;height:36px;border:1px solid #d0ad7277;border-radius:50%;background:#090908d9;color:#f5f0e7;font-size:24px;cursor:pointer}
 .previewImage{width:100%;height:clamp(170px,34vh,260px);background:#090908;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .previewImage img{width:100%;height:100%;object-fit:contain}
@@ -812,7 +813,7 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
 .previewView,.previewWhatsApp{display:flex;align-items:center;justify-content:center;min-height:44px;padding:11px 10px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:.8px;text-align:center;cursor:pointer}
 .previewView{border:1px solid #c4a16a;background:linear-gradient(135deg,#dfc18f,#b58b50);color:#17130d}
 .previewWhatsApp{border:1px solid #62543d;color:#e8d2aa}
-@media(max-width:520px){.projectPreviewBackdrop{padding:13px}.projectPreviewModal{width:100%;max-height:86vh;border-radius:10px}.previewImage{height:clamp(155px,29vh,215px)}.previewBody{padding:18px 17px 19px}.previewActions{grid-template-columns:1fr}.previewView,.previewWhatsApp{min-height:42px}}
+@media(max-width:520px){.projectPreviewBackdrop{padding:20px 16px}.projectPreviewModal{width:min(90vw,400px);max-height:78vh;border-radius:12px}.previewImage{height:clamp(145px,25vh,195px)}.previewBody{padding:17px 16px 18px}.previewActions{grid-template-columns:1fr}.previewView,.previewWhatsApp{min-height:42px}}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
