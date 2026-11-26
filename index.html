@@ -821,6 +821,37 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
 .floatingWhatsApp svg{width:36px;height:36px;fill:currentColor;flex:0 0 auto}
 @media(max-width:720px){.floatingWhatsApp{right:14px;bottom:calc(16px + env(safe-area-inset-bottom));width:56px;height:56px}.floatingWhatsApp svg{width:34px;height:34px}}
 
+
+/* Developer portfolio */
+.developerNetwork{padding:52px 0 58px;background:linear-gradient(180deg,#141310 0%,#101010 100%);border-top:1px solid #302a20;border-bottom:1px solid #302a20}
+.developerHead{display:flex;align-items:end;justify-content:space-between;margin:5px 0 25px}
+.developerHead h2{font-size:29px;margin:5px 0}
+.developerHead p{color:var(--muted);font-size:13px;margin:0;max-width:620px}
+.developerLogoGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.developerLogo{min-height:92px;padding:16px 12px;background:#f7f6f2;border:1px solid #e5e1d8;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;line-height:1}
+.developerLogo .logoMain{font-size:clamp(17px,2vw,24px);font-weight:800;letter-spacing:-.7px;color:#222;white-space:nowrap}
+.developerLogo .logoSub{font-size:9px;font-weight:700;letter-spacing:2px;margin-top:6px;color:#555}
+.developerLogo.tslaw .logoMain{letter-spacing:2px;color:#202020}
+.developerLogo.tslaw .logoSub{color:#8d6c3c}
+.developerLogo.sunway .logoMain{color:#d71920;letter-spacing:1px}
+.developerLogo.sunway .logoSub{color:#d71920}
+.developerLogo.chinhin .logoMain{color:#174b85}
+.developerLogo.chinhin .logoSub{color:#c62828}
+.developerLogo.avaland .logoMain{color:#555;letter-spacing:2px;font-weight:500}
+.developerLogo.paramount .logoMain{color:#174b73;letter-spacing:1px}
+.developerLogo.paramount .logoSub{color:#36a6a3}
+.developerLogo.binastra .logoMain{color:#9a793f;letter-spacing:1px}
+.developerLogo.binastra .logoSub{color:#242424}
+.developerLogo.mahsing .logoMain{color:#d71920;font-style:italic;letter-spacing:-1px}
+.developerLogo.osk .logoMain{color:#154c80;letter-spacing:2px}
+.developerLogo.osk .logoSub{color:#154c80}
+.developerLogo.uem .logoMain{color:#164a78;letter-spacing:2px}
+.developerLogo.uem .logoSub{color:#d52b37}
+.developerLogo.exsim .logoMain{color:#1c3150;letter-spacing:3px}
+.developerLogo.armani .logoMain{color:#1c1c1c;letter-spacing:2px;font-weight:500}
+.developerLogo.armani .logoSub{color:#8e744d}
+.developerNote{font-size:10px;color:#89837a;margin:14px 0 0}
+@media(max-width:720px){.developerNetwork{padding:42px 0}.developerLogoGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.developerLogo{min-height:76px;padding:12px 8px}.developerLogo .logoMain{font-size:19px}.developerHead h2{font-size:25px}}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
@@ -857,6 +888,7 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
 </select></div></div>
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><div class="aboutGrid"><div class="aboutIntro"><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div><div class="clientMoments"><div class="eyebrow">REAL PEOPLE · REAL MILESTONES</div><h3>Client Moments</h3><div class="clientMomentGrid" id="clientMomentGrid"><div class="muted">Loading client moments…</div></div></div></div></div></section>
+<section class="developerNetwork" id="developerNetwork"><div class="wrap"><div class="eyebrow">DEVELOPER PORTFOLIO</div><div class="developerHead"><div><h2>Developers I Work With</h2><p>Explore residential projects from these developers. Contact me for available projects, layouts and latest pricing.</p></div></div><div class="developerLogoGrid" aria-label="Developers whose projects Xaven offers"><div class="developerLogo tslaw"><span class="logoMain">TSLAW</span><span class="logoSub">LAND</span></div><div class="developerLogo sunway"><span class="logoMain">SUNWAY</span><span class="logoSub">PROPERTY</span></div><div class="developerLogo chinhin"><span class="logoMain">CHIN HIN</span><span class="logoSub">PROPERTY</span></div><div class="developerLogo avaland"><span class="logoMain">AVALAND</span></div><div class="developerLogo paramount"><span class="logoMain">PARAMOUNT</span><span class="logoSub">PROPERTY</span></div><div class="developerLogo binastra"><span class="logoMain">BINASTRA</span><span class="logoSub">LAND</span></div><div class="developerLogo mahsing"><span class="logoMain">Mah Sing</span></div><div class="developerLogo osk"><span class="logoMain">OSK</span><span class="logoSub">PROPERTY</span></div><div class="developerLogo uem"><span class="logoMain">UEM</span><span class="logoSub">SUNRISE</span></div><div class="developerLogo exsim"><span class="logoMain">EXSIM</span></div><div class="developerLogo armani"><span class="logoMain">ARMANI</span><span class="logoSub">GROUP</span></div></div><p class="developerNote">Selected developer brands · Project availability and representation may vary by development.</p></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Greater Klang Valley</span></div></div></section>
 <div class="detailOverlay" id="projectDetail" aria-hidden="true">
  <div class="detailShell">
