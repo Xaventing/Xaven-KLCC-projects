@@ -692,6 +692,20 @@ input,select{border-radius:8px;background:#11110f}
  .detailHighlight{padding:18px;margin-bottom:14px}
 }
 @media(max-width:380px){.detailTop>.eyebrow{display:none}.detailFacts{grid-template-columns:1fr 1fr}.detailHeroBottom{gap:13px}}
+
+/* Project photos: show full image and allow tap-to-enlarge */
+.detailHeroImage{display:flex;align-items:center;justify-content:center;background:#090908}
+.detailMainImage{object-fit:contain!important;cursor:zoom-in;background:#090908}
+.detailThumbs button img{object-fit:contain;background:#090908}
+.photoLightbox{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:58px 72px 76px;background:rgba(0,0,0,.96);backdrop-filter:blur(12px)}
+.photoLightbox.visible{display:flex}
+.photoLightbox>img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 20px 80px #000b}
+.lightboxClose,.lightboxNav{position:absolute;z-index:2;display:grid;place-items:center;border:1px solid #b997625c;background:#171510e8;color:#f5f0e7;cursor:pointer}
+.lightboxClose{top:18px;right:18px;width:44px;height:44px;border-radius:50%;font-size:27px;line-height:1}
+.lightboxNav{top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;font-size:29px}
+.lightboxPrev{left:18px}.lightboxNext{right:18px}
+.lightboxCaption{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#d8c7a8;font-size:10px;letter-spacing:2px}
+@media(max-width:600px){.photoLightbox{padding:60px 12px 70px}.lightboxClose{top:12px;right:12px}.lightboxNav{width:38px;height:38px}.lightboxPrev{left:8px}.lightboxNext{right:8px}}
 </style></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
@@ -803,11 +817,13 @@ function openProjectDetail(id,updateHash=true){
    (p.usp?'<section class="detailHighlight"><span class="eyebrow">WHY THIS PROJECT</span><strong>'+esc(p.usp)+'</strong><p>A standout feature worth knowing about.</p></section>':'')+
    '<section class="detailSection"><div class="eyebrow">THE RESIDENCE</div><h2>Discover '+esc(p.n)+'</h2><p class="detailDescription">'+esc(p.desc||"Contact Xaven for more information about this project, including the latest availability, layouts and pricing.")+'</p></section>'+
    '<section class="detailSection"><div class="eyebrow">AT A GLANCE</div><h2>Project Details</h2><div class="detailFacts">'+fact("UNIT SIZE",p.size)+fact("BEDROOM OPTIONS",p.bedrooms)+fact("EST. COMPLETION",p.completion)+fact("LOCATION",p.a)+fact("PROPERTY TYPE",p.t)+fact("DEVELOPER",p.d)+'</div>'+(p.tags?.length?'<div class="detailTags">'+p.tags.map(t=>'<span class="pill">'+esc(t)+'</span>').join('')+'</div>':'')+'</section>'+
-  '</main><aside class="detailEnquiry"><div class="detailEnquiryInner"><span class="eyebrow">PERSONAL PROPERTY ASSISTANCE</span><h2>Let’s explore this property.</h2><p>Get the latest unit availability, floor plans and pricing directly from Xaven.</p><a class="detailWhatsApp" href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN <span>↗</span></a>'+(p.brochure?'<a class="detailResource" href="'+esc(p.brochure)+'" target="_blank" rel="noopener">VIEW PROJECT BROCHURE ↗</a>':'')+(p.floorplan?'<a class="detailResource" href="'+esc(p.floorplan)+'" target="_blank" rel="noopener">VIEW FLOOR PLAN ↗</a>':'')+'<div class="detailContactNote">XAVEN TING <span>·</span> 018 205 7030</div></div></aside></div>';
+  '</main><aside class="detailEnquiry"><div class="detailEnquiryInner"><span class="eyebrow">PERSONAL PROPERTY ASSISTANCE</span><h2>Let’s explore this property.</h2><p>Get the latest unit availability, floor plans and pricing directly from Xaven.</p><a class="detailWhatsApp" href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN <span>↗</span></a>'+(p.brochure?'<a class="detailResource" href="'+esc(p.brochure)+'" target="_blank" rel="noopener">VIEW PROJECT BROCHURE ↗</a>':'')+(p.floorplan?'<a class="detailResource" href="'+esc(p.floorplan)+'" target="_blank" rel="noopener">VIEW FLOOR PLAN ↗</a>':'')+'<div class="detailContactNote">XAVEN TING <span>·</span> 018 205 7030</div></div></aside></div>'+
+  (photos.length?'<div class="photoLightbox" id="photoLightbox" aria-hidden="true"><button type="button" class="lightboxClose" id="lightboxClose" aria-label="Close enlarged photo">×</button><button type="button" class="lightboxNav lightboxPrev" id="lightboxPrev" aria-label="Previous photo">‹</button><img id="lightboxImage" src="'+esc(photos[0])+'" alt="'+esc(p.n)+'"><button type="button" class="lightboxNav lightboxNext" id="lightboxNext" aria-label="Next photo">›</button><div class="lightboxCaption" id="lightboxCaption">01 / '+String(photos.length).padStart(2,"0")+'</div></div>':'');
  $("projectDetail").classList.add("open");$("projectDetail").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
  if(updateHash)history.pushState({projectId:id},"","#project/"+encodeURIComponent(id));
- const setGallery=i=>{activeGalleryIndex=(i+photos.length)%photos.length;const img=$("detailMainImage");if(img)img.src=photos[activeGalleryIndex];const count=$("galleryCount");if(count)count.textContent=String(activeGalleryIndex+1).padStart(2,"0")+" / "+String(photos.length).padStart(2,"0");document.querySelectorAll("[data-gallery-index]").forEach(el=>el.classList.toggle("active",Number(el.dataset.galleryIndex)===activeGalleryIndex));};
- if(photos.length>1){$("galleryPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("galleryNext").onclick=()=>setGallery(activeGalleryIndex+1);document.querySelectorAll("[data-gallery-index]").forEach(el=>el.onclick=()=>setGallery(Number(el.dataset.galleryIndex)));}
+ const setGallery=i=>{activeGalleryIndex=(i+photos.length)%photos.length;const img=$("detailMainImage");if(img)img.src=photos[activeGalleryIndex];const zoomImg=$("lightboxImage");if(zoomImg)zoomImg.src=photos[activeGalleryIndex];const countText=String(activeGalleryIndex+1).padStart(2,"0")+" / "+String(photos.length).padStart(2,"0");const count=$("galleryCount");if(count)count.textContent=countText;const caption=$("lightboxCaption");if(caption)caption.textContent=countText;document.querySelectorAll("[data-gallery-index]").forEach(el=>el.classList.toggle("active",Number(el.dataset.galleryIndex)===activeGalleryIndex));};
+ if(photos.length){const lightbox=$("photoLightbox");const closeLightbox=()=>{lightbox.classList.remove("visible");lightbox.setAttribute("aria-hidden","true");};$("detailMainImage")?.addEventListener("click",()=>{lightbox.classList.add("visible");lightbox.setAttribute("aria-hidden","false");});$("lightboxClose").onclick=closeLightbox;lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeLightbox();});}
+ if(photos.length>1){$("galleryPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("galleryNext").onclick=()=>setGallery(activeGalleryIndex+1);$("lightboxPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("lightboxNext").onclick=()=>setGallery(activeGalleryIndex+1);document.querySelectorAll("[data-gallery-index]").forEach(el=>el.onclick=()=>setGallery(Number(el.dataset.galleryIndex)));}
 }
 function closeProjectDetail(clearHash=true){
  $("projectDetail").classList.remove("open");$("projectDetail").setAttribute("aria-hidden","true");document.body.style.overflow="";
@@ -823,7 +839,7 @@ $("cards").addEventListener("click",e=>{
 });
 $("detailBack").addEventListener("click",()=>closeProjectDetail());
 $("projectDetail").addEventListener("click",e=>{if(e.target.id==="projectDetail")closeProjectDetail();});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("photoLightbox")?.classList.contains("visible")){$("photoLightbox").classList.remove("visible");$("photoLightbox").setAttribute("aria-hidden","true");return;}if(e.key==="ArrowLeft"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxPrev")?.click();return;}if(e.key==="ArrowRight"&&$("photoLightbox")?.classList.contains("visible")){$("lightboxNext")?.click();return;}if(e.key==="Escape"&&$("projectDetail").classList.contains("open"))closeProjectDetail();});
 window.addEventListener("popstate",()=>{const match=location.hash.match(/^#project\/(.+)$/);if(match)openProjectDetail(decodeURIComponent(match[1]),false);else closeProjectDetail(false);});
 function syncTags() {
   document.querySelectorAll("[data-tag]").forEach(e => e.classList.toggle("active", chosen.has(e.dataset.tag)));
