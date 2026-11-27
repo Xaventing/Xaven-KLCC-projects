@@ -921,6 +921,19 @@ html.forceMobile .detailFacts{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cardUSP{font-size:6px;padding:4px 3px}
 }
 
+
+/* FINAL PROJECT GRID OVERRIDE — desktop 3 columns, mobile 2 columns */
+html.forceMobile .cards,.cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
+html.forceMobile .card,.card{aspect-ratio:16/10;min-width:0;width:100%}
+@media(max-width:720px){
+  html.forceMobile .cards,.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  html.forceMobile .card,.card{aspect-ratio:16/10;min-width:0;width:100%}
+}
+
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet"></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
