@@ -955,21 +955,13 @@ html.forceMobile .clientMomentCard{flex-basis:78%;width:78%;max-width:78%}
 html.forceMobile .projectScrollViewport{max-height:none!important;overflow:visible!important;overflow-y:visible!important;padding:0!important;overscroll-behavior:auto}
 html.forceMobile .projectScrollHint{display:none!important}
  
-/* Two independent horizontal project collections with staggered card widths */
-.projectShowcase{display:grid;gap:36px;margin-top:22px}
-.projectShowcaseRow{min-width:0}
-.projectRowHeading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:0 0 14px}
-.projectRowHeading h3{font:500 clamp(22px,3vw,30px)/1.15 Georgia,"Times New Roman",serif;margin:5px 0 0;color:#f2eadc}
-.projectSwipeNote{font-size:8px;letter-spacing:1.6px;color:#a99575;white-space:nowrap}
-.projectSwipeNote b{font-size:15px;color:#d0ad72;margin-left:6px}
-.projectRail{display:flex;align-items:stretch;gap:14px;overflow-x:auto;overflow-y:hidden;padding:4px 22vw 18px 2px;scroll-snap-type:x mandatory;scroll-padding-left:2px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#8b7048 #1b1915;position:relative}
-.projectRail::-webkit-scrollbar{height:5px}
+/* One project collection, displayed in two independent seamless horizontal lanes */
+.projectShowcase{display:grid;gap:12px;margin-top:18px;min-width:0}
+.projectRail{display:flex;align-items:stretch;gap:8px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 12px;scroll-snap-type:none;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#8b7048 #1b1915;position:relative;min-width:0}
+.projectRail::-webkit-scrollbar{height:4px}
 .projectRail::-webkit-scrollbar-track{background:#1b1915;border-radius:99px}
 .projectRail::-webkit-scrollbar-thumb{background:#8b7048;border-radius:99px}
-.projectRail .card{flex:0 0 31%;width:31%;aspect-ratio:5/4;min-width:0;scroll-snap-align:start;box-shadow:0 15px 38px #0008}
-.projectRail .card:nth-child(4n+2){flex-basis:24%;width:24%;aspect-ratio:4/5}
-.projectRail .card:nth-child(4n+3){flex-basis:34%;width:34%;aspect-ratio:5/4}
-.projectRail .card:nth-child(4n+4){flex-basis:27%;width:27%;aspect-ratio:4/5}
+.projectRail .card{flex:0 0 28%;width:28%;aspect-ratio:16/10;min-width:0;scroll-snap-align:none;box-shadow:0 10px 24px #0007;border-radius:9px}
 .projectRail .card .photo{position:absolute;inset:0;height:auto;padding:0}
 .projectRail .card .photo>img{object-fit:cover}
 .projectRail .card .photo:after{background:linear-gradient(180deg,#08080705 10%,#0808071c 42%,#080807e8 100%)}
@@ -978,17 +970,11 @@ html.forceMobile .projectScrollHint{display:none!important}
 .projectRail .card .cardUSP{max-width:44%;font-size:8px}
 .projectRail .card .body{display:none}
 .projectRail .card .cardShade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(110deg,#0000 45%,#08080712 100%);box-shadow:inset 0 0 35px #0003}
-.projectRail .card:hover{transform:translateY(-3px);box-shadow:0 20px 48px #000b}
+.projectRail .card:hover{transform:translateY(-2px);box-shadow:0 16px 32px #0009}
 @media(max-width:720px){
- .projectShowcase{gap:27px}
- .projectRowHeading{margin-bottom:10px}
- .projectRowHeading h3{font-size:23px}
- .projectSwipeNote{font-size:7px;letter-spacing:1px}
- .projectRail{gap:10px;padding:3px 22vw 14px 2px}
- .projectRail .card{flex-basis:68vw;width:68vw;aspect-ratio:5/4;border-radius:10px}
- .projectRail .card:nth-child(4n+2){flex-basis:48vw;width:48vw;aspect-ratio:4/5}
- .projectRail .card:nth-child(4n+3){flex-basis:66vw;width:66vw;aspect-ratio:5/4}
- .projectRail .card:nth-child(4n+4){flex-basis:50vw;width:50vw;aspect-ratio:4/5}
+ .projectShowcase{gap:8px}
+ .projectRail{gap:7px;padding:3px 2px 10px}
+ .projectRail .card{flex:0 0 76vw;width:76vw;aspect-ratio:16/10;border-radius:9px}
  .projectRail .card .cardOverlay{left:10px;right:10px;bottom:10px}
  .projectRail .card .cardName{font-size:clamp(13px,3.8vw,17px)}
  .projectRail .card .cardArea{font-size:7px;letter-spacing:1px}
@@ -996,10 +982,7 @@ html.forceMobile .projectScrollHint{display:none!important}
  .projectRail .card .cardUSP{font-size:7px;padding:5px}
 }
 html.forceMobile .projectRail{overflow-x:auto;overflow-y:hidden}
-html.forceMobile .projectRail .card{flex:0 0 68vw;width:68vw}
-html.forceMobile .projectRail .card:nth-child(4n+2){flex-basis:48vw;width:48vw}
-html.forceMobile .projectRail .card:nth-child(4n+3){flex-basis:66vw;width:66vw}
-html.forceMobile .projectRail .card:nth-child(4n+4){flex-basis:50vw;width:50vw}
+html.forceMobile .projectRail .card{flex:0 0 76vw;width:76vw;aspect-ratio:16/10}
 
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet"></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
@@ -1035,7 +1018,7 @@ html.forceMobile .projectRail .card:nth-child(4n+4){flex-basis:50vw;width:50vw}
 <option>Petaling Jaya</option><option>Damansara</option><option>Subang Jaya</option><option>Puchong</option><option>Shah Alam</option><option>Klang</option><option>Cyberjaya</option>
 </optgroup>
 </select></div></div>
-<div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="projectShowcase" id="projectDirectory"><section class="projectShowcaseRow" id="featuredRow"><div class="projectRowHeading"><div><span class="eyebrow">HANDPICKED COLLECTION</span><h3>Featured Projects</h3></div><span class="projectSwipeNote">SWIPE TO EXPLORE <b>→</b></span></div><div class="projectRail featuredRail" id="featuredCards"></div></section><section class="projectShowcaseRow" id="moreRow"><div class="projectRowHeading"><div><span class="eyebrow">DISCOVER MORE</span><h3>Explore More Projects</h3></div><span class="projectSwipeNote">SWIPE TO EXPLORE <b>→</b></span></div><div class="projectRail moreRail" id="moreCards"></div></section></div></div></section>
+<div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="projectShowcase" id="projectDirectory"><div class="projectRail featuredRail" id="featuredCards" aria-label="Projects ordered by feature number"></div><div class="projectRail moreRail" id="moreCards" aria-label="Projects ordered by starting price"></div></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><div class="aboutGrid"><div class="aboutIntro"><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><div class="developerHead"><div><h2>Developers</h2><p>Browse projects from these developers. Contact me for available units, layouts and latest pricing.</p></div></div><div class="developerMarquee" aria-label="Developer logos"><div class="developerMarqueeTrack"><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div></div></div><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div><div class="clientMoments"><div class="eyebrow">REAL PEOPLE · REAL MILESTONES</div><h3>Client Moments</h3><div class="clientMomentGrid" id="clientMomentGrid"><div class="muted">Loading client moments…</div></div></div></div></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Cyberjaya</span><span>Greater Klang Valley</span></div></div></section>
 <div class="detailOverlay" id="projectDetail" aria-hidden="true">
@@ -1097,19 +1080,36 @@ function numericPrice(value){
  const n=Number(String(value).replace(/[^0-9.]/g,""));
  return Number.isFinite(n)&&n>0?n:Infinity;
 }
+function fillInfiniteRail(id,items){
+ const rail=$(id);
+ const cards=items.map(projectCardMarkup).join("");
+ rail.innerHTML=cards+cards+cards;
+ rail.dataset.loopCount=String(items.length);
+ requestAnimationFrame(()=>{
+  const setWidth=rail.scrollWidth/3;
+  rail.scrollLeft=setWidth;
+ });
+ if(!rail.dataset.loopReady){
+  rail.addEventListener("scroll",()=>{
+   const setWidth=rail.scrollWidth/3;
+   if(!setWidth)return;
+   if(rail.scrollLeft<setWidth*.5)rail.scrollLeft+=setWidth;
+   else if(rail.scrollLeft>setWidth*1.5)rail.scrollLeft-=setWidth;
+  },{passive:true});
+  rail.dataset.loopReady="1";
+ }
+}
 function render(){
  const area=$("area").value;
  const filtered=data.filter(x=>(!area||x.a===area)&&(!chosen.size||x.tags.some(v=>chosen.has(v))));
- const featured=filtered.filter(x=>x.featured).sort((a,b)=>{
+ const byFeature=[...filtered].sort((a,b)=>{
   const an=Number(a.featureNo)||Number(a.order)||999,bn=Number(b.featureNo)||Number(b.order)||999;
   return an-bn||a.n.localeCompare(b.n);
  });
- const more=filtered.filter(x=>!x.featured).sort((a,b)=>numericPrice(a.p)-numericPrice(b.p)||a.n.localeCompare(b.n));
+ const byPrice=[...filtered].sort((a,b)=>numericPrice(a.p)-numericPrice(b.p)||a.n.localeCompare(b.n));
  $("count").textContent=filtered.length+" published projects";
- $("featuredCards").innerHTML=featured.map(projectCardMarkup).join("");
- $("moreCards").innerHTML=more.map(projectCardMarkup).join("");
- $("featuredRow").style.display=featured.length?"block":"none";
- $("moreRow").style.display=more.length?"block":"none";
+ fillInfiniteRail("featuredCards",byFeature);
+ fillInfiniteRail("moreCards",byPrice);
 }
 function openProjectPreview(id){
  const p=data.find(item=>item.id===id);if(!p)return;
