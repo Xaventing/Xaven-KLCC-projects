@@ -934,6 +934,18 @@ html.forceMobile .card,.card{aspect-ratio:16/10;min-width:0;width:100%}
   html.forceMobile .card,.card{aspect-ratio:16/10;min-width:0;width:100%}
 }
 
+
+/* Scroll-led project directory: 12 complete cards plus a visible next-row preview */
+.projectScrollViewport{max-height:var(--project-scroll-height,900px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#8b7048 #1b1915;padding:0 5px 10px 0;scroll-behavior:smooth}
+.projectScrollViewport::-webkit-scrollbar{width:6px}
+.projectScrollViewport::-webkit-scrollbar-track{background:#1b1915;border-radius:99px}
+.projectScrollViewport::-webkit-scrollbar-thumb{background:#8b7048;border-radius:99px}
+.projectScrollHint{text-align:center;padding:11px 0 2px;color:#a99575;font-size:9px;letter-spacing:1.7px}
+.projectScrollHint span{font-size:14px;padding-left:7px}
+.clientMomentCard{flex-basis:42%;scroll-snap-align:start}
+@media(max-width:720px){.clientMomentCard{flex-basis:78%;width:78%;max-width:78%}}
+html.forceMobile .clientMomentCard{flex-basis:78%;width:78%;max-width:78%}
+
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet"></head><body>
 <header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
@@ -968,7 +980,7 @@ html.forceMobile .card,.card{aspect-ratio:16/10;min-width:0;width:100%}
 <option>Petaling Jaya</option><option>Damansara</option><option>Subang Jaya</option><option>Puchong</option><option>Shah Alam</option><option>Klang</option><option>Cyberjaya</option>
 </optgroup>
 </select></div></div>
-<div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="cards" id="cards"></div></div></section>
+<div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="projectScrollViewport" id="projectScrollViewport"><div class="cards" id="cards"></div></div><div class="projectScrollHint" id="projectScrollHint">SCROLL TO EXPLORE MORE PROJECTS <span>↓</span></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><div class="aboutGrid"><div class="aboutIntro"><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><div class="developerHead"><div><h2>Developers</h2><p>Browse projects from these developers. Contact me for available units, layouts and latest pricing.</p></div></div><div class="developerMarquee" aria-label="Developer logos"><div class="developerMarqueeTrack"><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div></div></div><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div><div class="clientMoments"><div class="eyebrow">REAL PEOPLE · REAL MILESTONES</div><h3>Client Moments</h3><div class="clientMomentGrid" id="clientMomentGrid"><div class="muted">Loading client moments…</div></div></div></div></div></section>
 <section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Cyberjaya</span><span>Greater Klang Valley</span></div></div></section>
 <div class="detailOverlay" id="projectDetail" aria-hidden="true">
@@ -1018,22 +1030,34 @@ function priceLabel(value) {
   const n = Number(String(value).replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? "From RM " + n.toLocaleString("en-MY") : esc(value);
 }
-let projectsShown=12;
+
+function setProjectScrollHeight(){
+ const viewport=$("projectScrollViewport"),grid=$("cards"),first=grid?.querySelector(".card");
+ if(!viewport||!first)return;
+ const mobile=window.matchMedia("(max-width:720px)").matches||document.documentElement.classList.contains("forceMobile");
+ const cols=mobile?2:3,fullRows=mobile?6:4;
+ const styles=getComputedStyle(grid),gap=parseFloat(styles.rowGap)||parseFloat(styles.gap)||12;
+ const rowHeight=first.getBoundingClientRect().height;
+ viewport.style.setProperty("--project-scroll-height",(rowHeight*(fullRows+.38)+gap*fullRows)+"px");
+ const hint=$("projectScrollHint");
+ if(hint)hint.style.display=grid.children.length>fullRows*cols?"block":"none";
+}
+window.addEventListener("resize",()=>requestAnimationFrame(setProjectScrollHeight));
+
 function render() {
   const area = $("area").value;
   const rows = data.filter(x =>
     (!area || x.a === area) &&
     (!chosen.size || x.tags.some(v => chosen.has(v)))
   );
-  const visibleRows=rows.slice(0,projectsShown);
   $("count").textContent = rows.length + " published projects";
-  $("cards").innerHTML = rows.length ? visibleRows.map(x =>
+  $("cards").innerHTML = rows.length ? rows.map(x =>
     '<article class="card" data-project-id="'+esc(x.id)+'"><div class="photo">'+(x.photos?.[0]?'<img src="'+esc(x.photos[0])+'" alt="'+esc(x.n)+'" loading="lazy">':'<div style="position:absolute;inset:0;background:linear-gradient(135deg,#554b3b,#191919)"></div>')+
     '<div class="cardOverlay"><div class="cardPrimaryInfo"><div class="cardArea">'+esc(x.a||"Kuala Lumpur")+'</div><h3 class="cardName">'+esc(x.n)+'</h3><div class="cardStarting">Starting from <strong>'+priceLabel(x.p).replace(/^From /,"")+'</strong></div></div>'+(x.usp?'<div class="cardUSP">'+esc(x.usp)+'</div>':'')+'</div></div>'+
     '<div class="body"><div class="projectExpand">'+(x.desc?'<p>'+esc(x.desc)+'</p>':'<p>Discover more about this development, including its features, layouts and availability.</p>')+(x.d?'<p style="color:#d0ad72;font-size:11px;letter-spacing:.5px">DEVELOPER · '+esc(x.d)+'</p>':'')+'<div>'+(x.tags||[]).map(v=>'<span class="pill">'+esc(v)+'</span>').join('')+'</div></div>'+
     '<div class="projectCardActions"><button type="button" class="learnBtn" data-action="expand">LEARN MORE +</button><button type="button" class="viewBtn" data-action="view">VIEW PROJECT ↗</button></div></div></article>'
   ).join('') : '<div style="grid-column:1/-1;padding:35px 0;border:1px dashed #444;color:#aaa">No published projects match your filters.</div>';
-  if(rows.length>projectsShown){$("cards").insertAdjacentHTML("afterend",'<div class="projectsLoadMoreWrap"><button type="button" id="projectsLoadMore" class="projectsLoadMore">LOAD MORE PROJECTS <span>↓</span></button><small>Showing '+visibleRows.length+' of '+rows.length+' projects</small></div>');$("projectsLoadMore").addEventListener("click",()=>{projectsShown+=12;render();});}
+  requestAnimationFrame(setProjectScrollHeight);
 }
 function openProjectPreview(id){
  const p=data.find(item=>item.id===id);if(!p)return;
