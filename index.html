@@ -708,7 +708,7 @@ input,select{border-radius:8px;background:#11110f}
 @media(max-width:600px){.photoLightbox{padding:60px 12px 70px}.lightboxClose{top:12px;right:12px}.lightboxNav{width:38px;height:38px}.lightboxPrev{left:8px}.lightboxNext{right:8px}}
 
 
-/* Mobile refinements: keep Client Moments inside the viewport and pin the hero banner */
+/* Mobile refinements: keep Client Moments inside the viewport; only the site header stays pinned */
 @media(max-width:720px){
   html,body{width:100%;max-width:100%;overflow-x:hidden}
   .about,.about>.wrap,.aboutGrid,.clientMoments{width:100%;max-width:100%;min-width:0}
@@ -720,7 +720,6 @@ input,select{border-radius:8px;background:#11110f}
   .clientMomentGrid::-webkit-scrollbar-thumb{background:#8b7048;border-radius:99px}
   .clientMomentCard{flex:0 0 calc((100% - 10px)/2);width:calc((100% - 10px)/2);max-width:calc((100% - 10px)/2);min-width:0;box-sizing:border-box;scroll-snap-align:start}
   .clientMomentCard img{width:100%;max-width:100%;display:block}
-  .hero.heroBanner{position:sticky;top:50px;z-index:2;width:100%;max-width:100%;margin:0}
   header{position:sticky;top:0;z-index:5}
 }
 @media(max-width:420px){.clientMomentCard{flex-basis:78%;width:78%;max-width:78%}}
@@ -731,7 +730,6 @@ html.forceMobile .clientMoments{overflow:hidden}
 html.forceMobile .clientMomentGrid{display:flex;width:100%;max-width:100%;min-width:0;box-sizing:border-box;gap:10px;overflow-x:auto;overflow-y:hidden;padding:2px 0 13px;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#8b7048 #1b1915}
 html.forceMobile .clientMomentCard{flex:0 0 calc((100% - 10px)/2);width:calc((100% - 10px)/2);max-width:calc((100% - 10px)/2);min-width:0;box-sizing:border-box;scroll-snap-align:start}
 html.forceMobile .clientMomentCard img{width:100%;max-width:100%;display:block}
-html.forceMobile .hero.heroBanner{position:sticky;top:50px;z-index:2;width:100%;max-width:100%;margin:0}
 html.forceMobile header{position:sticky;top:0;z-index:5}
 /* Physical-phone fallback: keep the layout mobile-sized even when Chrome requests Desktop site */
 html.forceMobile body{min-width:0;width:100%;overflow-x:hidden}
