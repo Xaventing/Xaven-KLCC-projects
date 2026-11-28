@@ -1121,7 +1121,7 @@ function render(){
 function openProjectPreview(id){
  const p=data.find(item=>item.id===id);if(!p)return;
  const photo=p.photos?.[0];
- const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more details?");
+ const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more project details?");
  $("previewContent").innerHTML=
   (photo?'<div class="previewImage"><img src="'+esc(photo)+'" alt="'+esc(p.n)+'"></div>':'<div class="previewImage previewNoImage">XAVEN PROPERTY DISCOVERY</div>')+
   '<div class="previewBody"><div class="eyebrow">'+esc((p.a||"KUALA LUMPUR").toUpperCase())+' · '+esc((p.t||"PROPERTY").toUpperCase())+'</div><h2 id="previewTitle">'+esc(p.n)+'</h2>'+
@@ -1142,7 +1142,7 @@ function openProjectDetail(id,updateHash=true){
  const p=data.find(item=>item.id===id);if(!p)return;
  activeGalleryProject=p;activeGalleryIndex=0;
  const photos=p.photos||[];
- const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more details?");
+ const waText=encodeURIComponent("Hi Xaven, I'm interested in "+p.n+". Can you share more project details?");
  const fact=(label,value)=>value?'<div class="detailFact"><span>'+label+'</span><strong>'+esc(value)+'</strong></div>':'';
  const image=photos.length?'<img class="detailMainImage" id="detailMainImage" src="'+esc(photos[0])+'" alt="'+esc(p.n)+'">':'<div class="detailMainImage detailImageFallback"><span>XAVEN PROPERTY DISCOVERY</span><strong>'+esc(p.n)+'</strong></div>';
  $("detailContent").innerHTML=
