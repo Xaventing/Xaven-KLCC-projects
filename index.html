@@ -991,13 +991,35 @@ html.forceMobile .projectScrollHint{display:none!important}
 html.forceMobile .projectRail{overflow-x:auto;overflow-y:hidden}
 html.forceMobile .projectRail .card{flex:0 0 76vw;width:76vw;aspect-ratio:16/10}
 
+
+/* Embedded Xaven 3D Property Map — replaces the old Areas I Cover block */
+.propertyMapSection{padding:76px 0 84px;border-top:1px solid #302d27;background:linear-gradient(180deg,#11100e 0%,#0b0b0a 100%)}
+.propertyMapHeading{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:25px}
+.propertyMapHeading h2{font-size:clamp(30px,4vw,46px);font-weight:500;letter-spacing:-.035em;margin:8px 0 9px}
+.propertyMapHeading p{max-width:660px;color:#aaa49a;font-size:14px;line-height:1.8;margin:0}
+.propertyMapFull{display:inline-flex;align-items:center;justify-content:center;gap:22px;flex:0 0 auto;padding:14px 18px;border:1px solid #9b7a4c;border-radius:7px;background:linear-gradient(135deg,#dfbf8c,#b68c51);color:#17130d;font-size:10px;font-weight:800;letter-spacing:1.2px;white-space:nowrap;transition:transform .2s,filter .2s}
+.propertyMapFull:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.propertyMapFull span{font-size:16px}
+.propertyMapFrame{position:relative;width:100%;height:min(78vh,850px);min-height:620px;overflow:hidden;border:1px solid #4b402f;border-radius:13px;background:#151513;box-shadow:0 22px 60px #0008}
+.propertyMapFrame iframe{display:block;width:100%;height:100%;border:0;background:#e8e6df}
+.propertyMapFoot{display:flex;justify-content:space-between;gap:14px;padding:13px 2px 0;color:#81796d;font-size:9px;letter-spacing:1.8px}
+@media(max-width:720px){
+ .propertyMapSection{padding:55px 0 62px}
+ .propertyMapHeading{display:block;margin-bottom:18px}
+ .propertyMapHeading p{font-size:12px}
+ .propertyMapFull{margin-top:17px;width:100%;justify-content:space-between}
+ .propertyMapFrame{height:74vh;min-height:590px;max-height:760px;border-radius:10px}
+ .propertyMapFoot{font-size:8px;letter-spacing:1px}
+}
+@media(max-width:420px){.propertyMapFrame{height:72vh;min-height:560px}}
+
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet"></head><body>
-<header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#about">About Xaven</a><a href="#areas">Locations</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
+<header><div class="wrap nav"><a class="brand" href="#">XAVEN<span>.</span></a><nav><a href="#projects">Explore Projects</a><a href="#categories">Categories</a><a href="#property-map">3D Project Map</a><a href="#about">About Xaven</a></nav><a class="gold" href="https://wa.me/60182057030">LET'S TALK ↗</a></div></header>
 <section class="hero heroBanner" aria-label="Xaven Ting introduction">
   <img class="heroBannerImage" src="xaven-hero-banner.png" alt="Xaven Ting with the Kuala Lumpur skyline" fetchpriority="high">
   <div class="heroBannerActions">
     <a class="btn" href="#projects">EXPLORE PROJECTS</a>
-    <a class="btn alt" href="https://wa.me/60182057030" target="_blank" rel="noopener">WHATSAPP XAVEN</a>
+    <a class="btn alt" href="#property-map">3D PROJECT MAP</a>
   </div>
 </section>
 <section id="categories"><div class="wrap"><div class="head"><div class="eyebrow">DISCOVER BY PURPOSE</div><h2>What are you looking for?</h2></div><div class="cats">
@@ -1027,7 +1049,22 @@ html.forceMobile .projectRail .card{flex:0 0 76vw;width:76vw;aspect-ratio:16/10}
 </select></div></div>
 <div class="tags" id="tags"><button class="tag active" data-tag="Foreigner Friendly">Foreigner Friendly</button><button class="tag" data-tag="First Home Buyer">First Home Buyer</button><button class="tag" data-tag="Investment Friendly">Investment Friendly</button><button class="tag" data-tag="Renter Friendly">Renter Friendly</button><button class="tag" data-tag="Family Living">Family Living</button><button class="tag" data-tag="Near MRT / LRT">Near MRT / LRT</button></div><div class="projectShowcase" id="projectDirectory"><div class="projectRail featuredRail" id="featuredCards" aria-label="Projects ordered by feature number"></div><div class="projectRail moreRail" id="moreCards" aria-label="Projects ordered by starting price"></div></div></div></section>
 <section class="about" id="about"><div class="wrap"><div class="eyebrow">MEET YOUR PROPERTY PARTNER</div><div class="aboutGrid"><div class="aboutIntro"><h2>Xaven Ting</h2><p>Property consultant focused on new residential developments in KLCC and surrounding Klang Valley areas. My goal is to make property discovery clearer — helping you compare locations, understand project details and shortlist options that match your needs.</p><div class="developerHead"><div><h2>Developers</h2><p>Browse projects from these developers. Contact me for available units, layouts and latest pricing.</p></div></div><div class="developerMarquee" aria-label="Developer logos"><div class="developerMarqueeTrack"><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div><div class="developerLogoItem"><img src="tslaw-land.png" alt="TSLAW Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="sunway-property.png" alt="Sunway Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="chin-hin-property.png?v=8ecd74f3" alt="Chin Hin Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="avaland.png" alt="Avaland logo" loading="lazy"></div><div class="developerLogoItem"><img src="paramount-property.png" alt="Paramount Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="binastra-land.png" alt="Binastra Land logo" loading="lazy"></div><div class="developerLogoItem"><img src="mah-sing.png" alt="Mah Sing logo" loading="lazy"></div><div class="developerLogoItem"><img src="osk-property.png" alt="OSK Property logo" loading="lazy"></div><div class="developerLogoItem"><img src="uem-sunrise.png" alt="UEM Sunrise logo" loading="lazy"></div><div class="developerLogoItem"><img src="exsim.png" alt="EXSIM logo" loading="lazy"></div><div class="developerLogoItem"><img src="armani-group.png" alt="ARMANI Group logo" loading="lazy"></div></div></div><a class="btn" href="https://wa.me/60182057030">CONNECT WITH XAVEN</a></div><div class="clientMoments"><div class="eyebrow">REAL PEOPLE · REAL MILESTONES</div><h3>Client Moments</h3><div class="clientMomentGrid" id="clientMomentGrid"><div class="muted">Loading client moments…</div></div></div></div></div></section>
-<section id="areas"><div class="wrap"><div class="eyebrow">EXPLORE BY LOCATION</div><h2>Areas I Cover</h2><div class="areas"><span>KLCC</span><span>Old Klang Road</span><span>Setapak</span><span>Sentul</span><span>Kepong</span><span>Mont Kiara</span><span>Bangsar</span><span>Cheras</span><span>Petaling Jaya</span><span>Cyberjaya</span><span>Greater Klang Valley</span></div></div></section>
+<section id="property-map" class="propertyMapSection">
+ <div class="wrap">
+  <div class="propertyMapHeading">
+   <div>
+    <div class="eyebrow">DISCOVER PROPERTIES IN 3D</div>
+    <h2>Explore Kuala Lumpur.</h2>
+    <p>Discover projects, explore neighbourhoods and find nearby public transport — all in one interactive map.</p>
+   </div>
+   <a class="propertyMapFull" href="https://xaventing.github.io/xaven-property-map/" target="_blank" rel="noopener">OPEN FULL MAP <span>↗</span></a>
+  </div>
+  <div class="propertyMapFrame">
+   <iframe src="https://xaventing.github.io/xaven-property-map/" title="Xaven Interactive 3D Property Map" loading="lazy" allow="fullscreen; geolocation" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <div class="propertyMapFoot"><span>INTERACTIVE 3D PROPERTY DISCOVERY</span><span>KL &amp; KLANG VALLEY</span></div>
+ </div>
+</section>
 <div class="detailOverlay" id="projectDetail" aria-hidden="true">
  <div class="detailShell">
   <div class="detailTop"><button class="detailBack" id="detailBack">← BACK TO PROJECTS</button><span class="eyebrow">XAVEN PROPERTY DISCOVERY</span></div>
