@@ -652,6 +652,12 @@ input,select{border-radius:8px;background:#11110f}
 .detailSection{padding:28px 0;border-top:1px solid #302d27}
 .detailSection h2,.detailEnquiry h2{font:500 clamp(24px,3vw,34px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.025em;margin:10px 0 13px;color:#f2eadc}
 .detailDescription{color:#bcb5aa;white-space:pre-line;line-height:1.95;font-size:14px;max-width:760px}
+.layoutGallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.layoutGallery a{display:block;min-width:0;padding:10px;background:#f5f3ef;border:1px solid #6b5a3d;border-radius:8px;overflow:hidden}
+.layoutGallery img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain}
+.layoutGallery a:focus-visible{outline:2px solid #d0ad72;outline-offset:3px}
+@media(max-width:520px){.layoutGallery{grid-template-columns:1fr;gap:10px}.layoutGallery a{padding:7px}.layoutGallery img{max-height:none}}
+
 .detailFacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
 .detailFact{padding:15px;background:linear-gradient(145deg,#191916,#11110f);border:1px solid #373126;border-radius:8px;min-height:78px}
 .detailFact span{display:block;color:#a8a196;font-size:9px;letter-spacing:1.2px}
@@ -1154,6 +1160,7 @@ function openProjectDetail(id,updateHash=true){
    (p.usp?'<section class="detailHighlight"><span class="eyebrow">WHY THIS PROJECT</span><strong>'+esc(p.usp)+'</strong><p>A standout feature worth knowing about.</p></section>':'')+
    '<section class="detailSection"><div class="eyebrow">THE RESIDENCE</div><h2>Discover '+esc(p.n)+'</h2><p class="detailDescription">'+esc(p.desc||"Contact Xaven for more information about this project, including the latest availability, layouts and pricing.")+'</p></section>'+
    '<section class="detailSection"><div class="eyebrow">AT A GLANCE</div><h2>Project Details</h2><div class="detailFacts">'+fact("UNIT SIZE",p.size)+fact("BEDROOM OPTIONS",p.bedrooms)+fact("EST. COMPLETION",p.completion)+fact("LOCATION",p.a)+fact("PROPERTY TYPE",p.t)+fact("DEVELOPER",p.d)+'</div>'+(p.tags?.length?'<div class="detailTags">'+p.tags.map(t=>'<span class="pill">'+esc(t)+'</span>').join('')+'</div>':'')+'</section>'+
+   (p.layouts?.length?'<section class="detailSection"><div class="eyebrow">AVAILABLE UNIT TYPES</div><h2>Layouts</h2><p class="detailDescription">Explore the available floor plan options for this project. Tap any image to view it in full size.</p><div class="layoutGallery">'+p.layouts.filter(l=>l&&l.image).map((l,i)=>'<a href="'+esc(l.image)+'" target="_blank" rel="noopener" aria-label="Open layout '+(i+1)+' in full size"><img src="'+esc(l.image)+'" alt="'+esc(p.n)+' layout '+(i+1)+'" loading="lazy"></a>').join('')+'</div></section>':'')+
   '</main><aside class="detailEnquiry"><div class="detailEnquiryInner"><span class="eyebrow">PERSONAL PROPERTY ASSISTANCE</span><h2>Let’s explore this property.</h2><p>Get the latest unit availability, floor plans and pricing directly from Xaven.</p><a class="detailWhatsApp" href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN <span>↗</span></a>'+(p.brochure?'<a class="detailResource" href="'+esc(p.brochure)+'" target="_blank" rel="noopener">VIEW PROJECT BROCHURE ↗</a>':'')+(p.floorplan?'<a class="detailResource" href="'+esc(p.floorplan)+'" target="_blank" rel="noopener">VIEW FLOOR PLAN ↗</a>':'')+'<div class="detailContactNote">XAVEN TING <span>·</span> 018 205 7030</div></div></aside></div>'+
   (photos.length?'<div class="photoLightbox" id="photoLightbox" aria-hidden="true"><button type="button" class="lightboxClose" id="lightboxClose" aria-label="Close enlarged photo">×</button><button type="button" class="lightboxNav lightboxPrev" id="lightboxPrev" aria-label="Previous photo">‹</button><img id="lightboxImage" src="'+esc(photos[0])+'" alt="'+esc(p.n)+'"><button type="button" class="lightboxNav lightboxNext" id="lightboxNext" aria-label="Next photo">›</button><div class="lightboxCaption" id="lightboxCaption">01 / '+String(photos.length).padStart(2,"0")+'</div></div>':'');
  $("projectDetail").classList.add("open");$("projectDetail").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
@@ -1209,6 +1216,7 @@ async function loadPublishedProjects() {
         completion:p.completion || "",
         floorplan:p.floorplan || "",
         brochure:p.brochure || "",
+        layouts:Array.isArray(p.layouts)?p.layouts.filter(l=>l&&typeof l.image==="string"&&l.image.trim()):[],
         tags:Array.isArray(p.tags)?p.tags:[],
         photos:Array.isArray(p.photos)?p.photos:[],
         featured:!!p.featured,
