@@ -652,11 +652,12 @@ input,select{border-radius:8px;background:#11110f}
 .detailSection{padding:28px 0;border-top:1px solid #302d27}
 .detailSection h2,.detailEnquiry h2{font:500 clamp(24px,3vw,34px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.025em;margin:10px 0 13px;color:#f2eadc}
 .detailDescription{color:#bcb5aa;white-space:pre-line;line-height:1.95;font-size:14px;max-width:760px}
-.layoutGallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
-.layoutGallery a{display:block;min-width:0;padding:10px;background:#f5f3ef;border:1px solid #6b5a3d;border-radius:8px;overflow:hidden}
-.layoutGallery img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain}
-.layoutGallery a:focus-visible{outline:2px solid #d0ad72;outline-offset:3px}
-@media(max-width:520px){.layoutGallery{grid-template-columns:1fr;gap:10px}.layoutGallery a{padding:7px}.layoutGallery img{max-height:none}}
+.layoutCarousel{position:relative;margin-top:18px;padding:12px 56px;background:#f5f3ef;border:1px solid #6b5a3d;border-radius:9px;min-height:180px;display:flex;align-items:center;justify-content:center}
+.layoutCarousel img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
+.layoutCarouselBtn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid #9b8154;background:#171614ef;color:#f3dfb7;font-size:23px;line-height:1;cursor:pointer;display:grid;place-items:center}
+.layoutCarouselBtn.prev{left:10px}.layoutCarouselBtn.next{right:10px}
+.layoutCarouselCount{position:absolute;bottom:8px;right:12px;padding:4px 9px;border-radius:20px;background:#111d;color:#fff;font-size:11px;letter-spacing:1px}
+@media(max-width:520px){.layoutCarousel{padding:10px 42px;min-height:140px}.layoutCarouselBtn{width:32px;height:32px;font-size:20px}.layoutCarouselBtn.prev{left:6px}.layoutCarouselBtn.next{right:6px}.layoutCarousel img{max-height:none}}
 
 .detailFacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
 .detailFact{padding:15px;background:linear-gradient(145deg,#191916,#11110f);border:1px solid #373126;border-radius:8px;min-height:78px}
@@ -1160,7 +1161,7 @@ function openProjectDetail(id,updateHash=true){
    (p.usp?'<section class="detailHighlight"><span class="eyebrow">WHY THIS PROJECT</span><strong>'+esc(p.usp)+'</strong><p>A standout feature worth knowing about.</p></section>':'')+
    '<section class="detailSection"><div class="eyebrow">THE RESIDENCE</div><h2>Discover '+esc(p.n)+'</h2><p class="detailDescription">'+esc(p.desc||"Contact Xaven for more information about this project, including the latest availability, layouts and pricing.")+'</p></section>'+
    '<section class="detailSection"><div class="eyebrow">AT A GLANCE</div><h2>Project Details</h2><div class="detailFacts">'+fact("UNIT SIZE",p.size)+fact("BEDROOM OPTIONS",p.bedrooms)+fact("EST. COMPLETION",p.completion)+fact("LOCATION",p.a)+fact("PROPERTY TYPE",p.t)+fact("DEVELOPER",p.d)+'</div>'+(p.tags?.length?'<div class="detailTags">'+p.tags.map(t=>'<span class="pill">'+esc(t)+'</span>').join('')+'</div>':'')+'</section>'+
-   (p.layouts?.length?'<section class="detailSection"><div class="eyebrow">AVAILABLE UNIT TYPES</div><h2>Layouts</h2><p class="detailDescription">Explore the available floor plan options for this project. Tap any image to view it in full size.</p><div class="layoutGallery">'+p.layouts.filter(l=>l&&l.image).map((l,i)=>'<a href="'+esc(l.image)+'" target="_blank" rel="noopener" aria-label="Open layout '+(i+1)+' in full size"><img src="'+esc(l.image)+'" alt="'+esc(p.n)+' layout '+(i+1)+'" loading="lazy"></a>').join('')+'</div></section>':'')+
+   (p.layouts?.filter(l=>l&&l.image).length?'<section class="detailSection"><div class="eyebrow">AVAILABLE UNIT TYPES</div><h2>Layouts</h2><p class="detailDescription">Browse the available floor plans one by one.</p><div class="layoutCarousel"><button type="button" class="layoutCarouselBtn prev" id="layoutPrev" aria-label="Previous layout">‹</button><img id="layoutCurrentImage" src="'+esc(p.layouts.filter(l=>l&&l.image)[0].image)+'" alt="'+esc(p.n)+' layout 1"><button type="button" class="layoutCarouselBtn next" id="layoutNext" aria-label="Next layout">›</button><span class="layoutCarouselCount" id="layoutCount">01 / '+String(p.layouts.filter(l=>l&&l.image).length).padStart(2,"0")+'</span></div></section>':'')+
   '</main><aside class="detailEnquiry"><div class="detailEnquiryInner"><span class="eyebrow">PERSONAL PROPERTY ASSISTANCE</span><h2>Let’s explore this property.</h2><p>Get the latest unit availability, floor plans and pricing directly from Xaven.</p><a class="detailWhatsApp" href="https://wa.me/60182057030?text='+waText+'" target="_blank" rel="noopener">WHATSAPP XAVEN <span>↗</span></a>'+(p.brochure?'<a class="detailResource" href="'+esc(p.brochure)+'" target="_blank" rel="noopener">VIEW PROJECT BROCHURE ↗</a>':'')+(p.floorplan?'<a class="detailResource" href="'+esc(p.floorplan)+'" target="_blank" rel="noopener">VIEW FLOOR PLAN ↗</a>':'')+'<div class="detailContactNote">XAVEN TING <span>·</span> 018 205 7030</div></div></aside></div>'+
   (photos.length?'<div class="photoLightbox" id="photoLightbox" aria-hidden="true"><button type="button" class="lightboxClose" id="lightboxClose" aria-label="Close enlarged photo">×</button><button type="button" class="lightboxNav lightboxPrev" id="lightboxPrev" aria-label="Previous photo">‹</button><img id="lightboxImage" src="'+esc(photos[0])+'" alt="'+esc(p.n)+'"><button type="button" class="lightboxNav lightboxNext" id="lightboxNext" aria-label="Next photo">›</button><div class="lightboxCaption" id="lightboxCaption">01 / '+String(photos.length).padStart(2,"0")+'</div></div>':'');
  $("projectDetail").classList.add("open");$("projectDetail").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
@@ -1168,6 +1169,18 @@ function openProjectDetail(id,updateHash=true){
  const setGallery=i=>{activeGalleryIndex=(i+photos.length)%photos.length;const img=$("detailMainImage");if(img)img.src=photos[activeGalleryIndex];const zoomImg=$("lightboxImage");if(zoomImg)zoomImg.src=photos[activeGalleryIndex];const countText=String(activeGalleryIndex+1).padStart(2,"0")+" / "+String(photos.length).padStart(2,"0");const count=$("galleryCount");if(count)count.textContent=countText;const caption=$("lightboxCaption");if(caption)caption.textContent=countText;document.querySelectorAll("[data-gallery-index]").forEach(el=>el.classList.toggle("active",Number(el.dataset.galleryIndex)===activeGalleryIndex));};
  if(photos.length){const lightbox=$("photoLightbox");const closeLightbox=()=>{lightbox.classList.remove("visible");lightbox.setAttribute("aria-hidden","true");};$("detailMainImage")?.addEventListener("click",()=>{lightbox.classList.add("visible");lightbox.setAttribute("aria-hidden","false");});$("lightboxClose").onclick=closeLightbox;lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeLightbox();});}
  if(photos.length>1){$("galleryPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("galleryNext").onclick=()=>setGallery(activeGalleryIndex+1);$("lightboxPrev").onclick=()=>setGallery(activeGalleryIndex-1);$("lightboxNext").onclick=()=>setGallery(activeGalleryIndex+1);document.querySelectorAll("[data-gallery-index]").forEach(el=>el.onclick=()=>setGallery(Number(el.dataset.galleryIndex)));}
+ const layoutImages=(p.layouts||[]).filter(l=>l&&l.image).map(l=>l.image);
+ if(layoutImages.length){
+  let layoutIndex=0;
+  const showLayout=i=>{
+   layoutIndex=(i+layoutImages.length)%layoutImages.length;
+   $("layoutCurrentImage").src=layoutImages[layoutIndex];
+   $("layoutCurrentImage").alt=p.n+" layout "+(layoutIndex+1);
+   $("layoutCount").textContent=String(layoutIndex+1).padStart(2,"0")+" / "+String(layoutImages.length).padStart(2,"0");
+  };
+  $("layoutPrev").onclick=()=>showLayout(layoutIndex-1);
+  $("layoutNext").onclick=()=>showLayout(layoutIndex+1);
+ }
 }
 function closeProjectDetail(clearHash=true){
  $("projectDetail").classList.remove("open");$("projectDetail").setAttribute("aria-hidden","true");document.body.style.overflow="";
